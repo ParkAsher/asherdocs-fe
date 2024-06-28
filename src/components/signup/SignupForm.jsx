@@ -2,11 +2,61 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
 import Button from './../common/Button';
-import useInput from './../../hooks/useInput';
+import { useMutation } from '@tanstack/react-query';
+import { checkEmailDuplicated, checkNicknameDuplicated } from '../../apis/user.api';
 
 function SignupForm() {
+    const emailMutation = useMutation({
+        mutationFn: checkEmailDuplicated,
+        onSuccess: (data, variables, context) => {
+            alert('사용 가능한 이메일입니다.');
+
+            setIsDuplicateEmail(true);
+        },
+        onError: (error, variables, context) => {
+            setEmail('');
+            const { status } = error.response;
+
+            switch (status) {
+                case 409:
+                    console.log('닉네임 중복');
+                    alert('이미 사용중인 닉네임입니다.');
+                    break;
+
+                default:
+                    alert('다시 시도해주세요.');
+                    break;
+            }
+        },
+    });
+
+    const nicknameMutation = useMutation({
+        mutationFn: checkNicknameDuplicated,
+        onSuccess: (data, variables, context) => {
+            alert('사용 가능한 닉네임입니다.');
+
+            setIsDuplicateNickname(true);
+        },
+        onError: (error, variables, context) => {
+            setNickname('');
+            const { status } = error.response;
+
+            switch (status) {
+                case 409:
+                    console.log('닉네임 중복');
+                    alert('이미 사용중인 닉네임입니다.');
+                    break;
+
+                default:
+                    alert('다시 시도해주세요.');
+                    break;
+            }
+        },
+    });
+
     const [email, setEmail] = useState('');
     const [isValidEmail, setIsValidEmail] = useState(false);
+    const [isDuplicateEmail, setIsDuplicateEmail] = useState(false);
 
     const [password, setPassword] = useState('');
     const [isValidPassword, setIsValidPassword] = useState(false);
@@ -16,6 +66,7 @@ function SignupForm() {
 
     const [nickname, setNickname] = useState('');
     const [isValidNickname, setIsValidNickname] = useState(false);
+    const [isDuplicateNickname, setIsDuplicateNickname] = useState(false);
 
     const onChangeEmailHandler = (e) => {
         const { value } = e.target;
@@ -66,6 +117,34 @@ function SignupForm() {
         }
     };
 
+    // 이메일 중복 검사
+    const handleEmailDuplicateCheck = (e) => {
+        e.preventDefault();
+
+        if (!isValidEmail) {
+            setEmail('');
+            return alert('형식에 맞게 입력해주세요.');
+        }
+
+        if (!email) return alert('이메일을 입력해주세요.');
+
+        emailMutation.mutate({ email });
+    };
+
+    // 닉네임 중복 검사
+    const handleNicknameDuplicateCheck = (e) => {
+        e.preventDefault();
+
+        if (!isValidNickname) {
+            setNickname('');
+            return alert('형식에 맞게 입력해주세요.');
+        }
+
+        if (!nickname) return alert('닉네임을 입력해주세요.');
+
+        nicknameMutation.mutate({ nickname });
+    };
+
     return (
         <SignupBlock>
             <SignupFormBlock>
@@ -81,7 +160,7 @@ function SignupForm() {
                             value={email}
                             onChange={onChangeEmailHandler}
                         ></SignupInput>
-                        <Button>중복확인</Button>
+                        <Button onClick={handleEmailDuplicateCheck}>중복확인</Button>
                         {email === '' ? (
                             <span></span>
                         ) : isValidEmail ? (
@@ -130,7 +209,7 @@ function SignupForm() {
                             value={nickname}
                             onChange={onChangeNicknameHandler}
                         ></SignupInput>
-                        <Button>중복확인</Button>
+                        <Button onClick={handleNicknameDuplicateCheck}>중복확인</Button>
                         {nickname === '' ? (
                             <span></span>
                         ) : isValidNickname ? (
