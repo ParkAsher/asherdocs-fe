@@ -29,6 +29,8 @@ const buttonCss = css`
                 return oc.violet[props.colornumber];
             case 'indigo':
                 return oc.indigo[props.colornumber];
+            case 'cyan':
+                return oc.cyan[props.colornumber];
             default:
                 return oc.gray[8];
         }

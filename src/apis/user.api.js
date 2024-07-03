@@ -3,7 +3,7 @@ import axios from 'axios';
 // 이메일 중복확인
 const checkEmailDuplicated = async ({ email }) => {
     const response = await axios.post(
-        `http://localhost:5000/user/email/check`,
+        `${process.env.REACT_APP_SERVER_URL}/user/email/check`,
         { email },
         {
             withCredentials: true,
@@ -17,7 +17,7 @@ const checkEmailDuplicated = async ({ email }) => {
 // 닉네임 중복확인
 const checkNicknameDuplicated = async ({ nickname }) => {
     const response = await axios.post(
-        `http://localhost:5000/user/nickname/check`,
+        `${process.env.REACT_APP_SERVER_URL}/user/nickname/check`,
         { nickname },
         {
             withCredentials: true,

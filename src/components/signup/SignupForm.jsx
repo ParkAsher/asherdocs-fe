@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
 import Button from './../common/Button';
@@ -53,6 +53,11 @@ function SignupForm() {
             }
         },
     });
+
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const passwordCheckRef = useRef();
+    const nicknameRef = useRef();
 
     const [email, setEmail] = useState('');
     const [isValidEmail, setIsValidEmail] = useState(false);
@@ -145,6 +150,71 @@ function SignupForm() {
         nicknameMutation.mutate({ nickname });
     };
 
+    // 회원가입
+    const handleSignupButtonClick = (e) => {
+        e.preventDefault();
+
+        if (!email) {
+            alert('이메일을 입력해주세요.');
+            emailRef.current.focus();
+            return;
+        }
+
+        if (!isValidEmail) {
+            alert('올바른 이메일을 입력해주세요.');
+            emailRef.current.focus();
+            return;
+        }
+
+        if (!password) {
+            alert('비밀번호를 입력해주세요.');
+            passwordRef.current.focus();
+            return;
+        }
+
+        if (!isValidPassword) {
+            alert('올바른 비밀번호를 입력해주세요');
+            passwordRef.current.focus();
+            return;
+        }
+
+        if (!passwordCheck) {
+            alert('비밀번호 확인을 입력해주세요.');
+            passwordCheckRef.current.focus();
+            return;
+        }
+
+        if (!isCheckedPassword) {
+            alert('비밀번호가 일치하지 않습니다.');
+            passwordCheckRef.current.focus();
+            return;
+        }
+
+        if (!nickname) {
+            alert('닉네임을 입력해주세요.');
+            nicknameRef.current.focus();
+            return;
+        }
+
+        if (!isValidNickname) {
+            alert('올바른 닉네임을 입력해주세요.');
+            nicknameRef.current.focus();
+            return;
+        }
+
+        if (!isDuplicateEmail) {
+            alert('이메일 중복확인을 해주세요.');
+            emailRef.current.focus();
+            return;
+        }
+
+        if (!isDuplicateNickname) {
+            alert('닉네임 중복확인을 해주세요.');
+            nicknameRef.current.focus();
+            return;
+        }
+    };
+
     return (
         <SignupBlock>
             <SignupFormBlock>
@@ -155,15 +225,14 @@ function SignupForm() {
                     <p>이메일</p>
                     <div>
                         <SignupInput
+                            ref={emailRef}
                             placeholder='aaaa@naver.com'
                             type='text'
                             value={email}
                             onChange={onChangeEmailHandler}
                         ></SignupInput>
                         <Button onClick={handleEmailDuplicateCheck}>중복확인</Button>
-                        {email === '' ? (
-                            <span></span>
-                        ) : isValidEmail ? (
+                        {email === '' ? null : isValidEmail ? (
                             <span></span>
                         ) : (
                             <span style={{ color: 'red' }}>형식이 올바르지 않습니다.</span>
@@ -172,30 +241,26 @@ function SignupForm() {
                     <p>비밀번호</p>
                     <div>
                         <SignupInput
+                            ref={passwordRef}
                             placeholder='8~12자'
                             type='password'
                             value={password}
                             onChange={onChangePasswordHandler}
                         ></SignupInput>
-                        {password === '' ? (
-                            <span></span>
-                        ) : isValidPassword ? (
-                            <span></span>
-                        ) : (
+                        {password === '' ? null : isValidPassword ? null : (
                             <span style={{ color: 'red' }}>형식이 올바르지 않습니다.</span>
                         )}
                     </div>
                     <p>비밀번호 확인</p>
                     <div>
                         <SignupInput
+                            ref={passwordCheckRef}
                             placeholder='비밀번호 확인'
                             type='password'
                             value={passwordCheck}
                             onChange={onChangePasswordCheckHandler}
                         ></SignupInput>
-                        {passwordCheck === '' ? (
-                            <span></span>
-                        ) : isCheckedPassword ? (
+                        {passwordCheck === '' ? null : isCheckedPassword ? (
                             <span style={{ color: 'blue' }}>비밀번호가 일치합니다.</span>
                         ) : (
                             <span style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</span>
@@ -204,19 +269,21 @@ function SignupForm() {
                     <p>닉네임</p>
                     <div>
                         <SignupInput
+                            ref={nicknameRef}
                             placeholder='2~15자'
                             type='text'
                             value={nickname}
                             onChange={onChangeNicknameHandler}
                         ></SignupInput>
                         <Button onClick={handleNicknameDuplicateCheck}>중복확인</Button>
-                        {nickname === '' ? (
-                            <span></span>
-                        ) : isValidNickname ? (
-                            <span></span>
-                        ) : (
+                        {nickname === '' ? null : isValidNickname ? null : (
                             <span style={{ color: 'red' }}>형식이 올바르지 않습니다.</span>
                         )}
+                    </div>
+                    <div style={{ justifyContent: 'flex-end' }}>
+                        <Button onClick={handleSignupButtonClick} colorname='cyan' colornumber='4'>
+                            가입하기
+                        </Button>
                     </div>
                 </SignupInputForm>
             </SignupFormBlock>
@@ -243,6 +310,7 @@ const SignupFormBlock = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 2rem;
 `;
 
 const SignupFormHeader = styled.div`
@@ -260,7 +328,7 @@ const SignupInputForm = styled.form`
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
 
         span {
             font-size: 0.825rem;
