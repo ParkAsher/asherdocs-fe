@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
 import Button from './../common/Button';
-import { useDuplicatedCheckMutation } from '../../hooks/queries/user.query';
+import { useDuplicatedCheckMutation, useSignupMutation } from '../../hooks/queries/user.query';
 
 function SignupForm() {
     const emailRef = useRef();
@@ -69,6 +69,8 @@ function SignupForm() {
         DuplicatedCheckSuccessCallback,
         DuplicatedCheckErrorCallback
     );
+
+    const { mutate: signupMutate } = useSignupMutation();
 
     const onChangeEmailHandler = (e) => {
         const { value } = e.target;
@@ -210,6 +212,14 @@ function SignupForm() {
             nicknameRef.current.focus();
             return;
         }
+
+        const userForm = {
+            email,
+            password,
+            nickname,
+        };
+
+        signupMutate(userForm);
     };
 
     return (

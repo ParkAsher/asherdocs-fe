@@ -10,7 +10,6 @@ const checkEmailDuplicated = async ({ email }) => {
         }
     );
 
-    console.log(response.data);
     return response.data;
 };
 
@@ -24,8 +23,16 @@ const checkNicknameDuplicated = async ({ nickname }) => {
         }
     );
 
-    console.log(response.data);
     return response.data;
 };
 
-export { checkEmailDuplicated, checkNicknameDuplicated };
+// 회원가입
+const signUp = async (useForm) => {
+    const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/signup`, useForm, {
+        withCredentials: true,
+    });
+
+    return response.data;
+};
+
+export { checkEmailDuplicated, checkNicknameDuplicated, signUp };

@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { checkEmailDuplicated, checkNicknameDuplicated } from '../../apis/user.api';
+import { checkEmailDuplicated, checkNicknameDuplicated, signUp } from '../../apis/user.api';
 
 // 중복검사
 const useDuplicatedCheckMutation = (type, successCallback, errorCallback) => {
@@ -25,4 +25,19 @@ const useDuplicatedCheckMutation = (type, successCallback, errorCallback) => {
     });
 };
 
-export { useDuplicatedCheckMutation };
+// 회원가입
+const useSignupMutation = () => {
+    return useMutation({
+        mutationFn: signUp,
+        onSuccess: (data) => {
+            alert('회원가입에 성공했습니다!');
+            window.location.href = '/';
+        },
+        onError: (error) => {
+            alert('다시 시도해주세요.');
+            window.location.reload();
+        },
+    });
+};
+
+export { useDuplicatedCheckMutation, useSignupMutation };
