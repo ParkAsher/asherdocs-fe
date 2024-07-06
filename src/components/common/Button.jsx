@@ -22,21 +22,21 @@ const buttonCss = css`
     cursor: pointer;
 
     background: ${(props) => {
-        switch (props.colorname) {
+        switch (props.$colorname) {
             case 'gray':
-                return oc.gray[props.colornumber];
+                return oc.gray[props.$colornumber];
             case 'violet':
-                return oc.violet[props.colornumber];
+                return oc.violet[props.$colornumber];
             case 'indigo':
-                return oc.indigo[props.colornumber];
+                return oc.indigo[props.$colornumber];
             case 'cyan':
-                return oc.cyan[props.colornumber];
+                return oc.cyan[props.$colornumber];
             default:
                 return oc.gray[8];
         }
     }};
 
-    color: ${(props) => (parseInt(props.colornumber) < 3 ? 'black' : 'white')};
+    color: ${(props) => (parseInt(props.$colornumber) < 3 ? 'black' : 'white')};
 `;
 
 const StyledButton = styled.button`

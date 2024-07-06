@@ -9,10 +9,10 @@ function Header() {
             <HeaderInnerBlock>
                 <HeaderLogo />
                 <HeaderRight>
-                    <Button to='/signup' colorname='indigo' colornumber='3'>
+                    <Button to='/signup' $colorname='indigo' $colornumber='3'>
                         회원가입
                     </Button>
-                    <Button to='/login' colorname='indigo' colornumber='7'>
+                    <Button to='/login' $colorname='indigo' $colornumber='7'>
                         로그인
                     </Button>
                 </HeaderRight>

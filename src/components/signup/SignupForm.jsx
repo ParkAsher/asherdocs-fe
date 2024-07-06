@@ -281,7 +281,11 @@ function SignupForm() {
                         )}
                     </div>
                     <div style={{ justifyContent: 'flex-end' }}>
-                        <Button onClick={handleSignupButtonClick} colorname='cyan' colornumber='4'>
+                        <Button
+                            onClick={handleSignupButtonClick}
+                            $colorname='cyan'
+                            $colornumber='4'
+                        >
                             가입하기
                         </Button>
                     </div>
