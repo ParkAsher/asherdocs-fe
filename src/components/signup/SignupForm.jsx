@@ -2,58 +2,9 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
 import Button from './../common/Button';
-import { useMutation } from '@tanstack/react-query';
-import { checkEmailDuplicated, checkNicknameDuplicated } from '../../apis/user.api';
+import { useDuplicatedCheckMutation } from '../../hooks/queries/user.query';
 
 function SignupForm() {
-    const emailMutation = useMutation({
-        mutationFn: checkEmailDuplicated,
-        onSuccess: (data, variables, context) => {
-            alert('사용 가능한 이메일입니다.');
-
-            setIsDuplicateEmail(true);
-        },
-        onError: (error, variables, context) => {
-            setEmail('');
-            const { status } = error.response;
-
-            switch (status) {
-                case 409:
-                    console.log('닉네임 중복');
-                    alert('이미 사용중인 닉네임입니다.');
-                    break;
-
-                default:
-                    alert('다시 시도해주세요.');
-                    break;
-            }
-        },
-    });
-
-    const nicknameMutation = useMutation({
-        mutationFn: checkNicknameDuplicated,
-        onSuccess: (data, variables, context) => {
-            alert('사용 가능한 닉네임입니다.');
-
-            setIsDuplicateNickname(true);
-        },
-        onError: (error, variables, context) => {
-            setNickname('');
-            const { status } = error.response;
-
-            switch (status) {
-                case 409:
-                    console.log('닉네임 중복');
-                    alert('이미 사용중인 닉네임입니다.');
-                    break;
-
-                default:
-                    alert('다시 시도해주세요.');
-                    break;
-            }
-        },
-    });
-
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordCheckRef = useRef();
@@ -72,6 +23,52 @@ function SignupForm() {
     const [nickname, setNickname] = useState('');
     const [isValidNickname, setIsValidNickname] = useState(false);
     const [isDuplicateNickname, setIsDuplicateNickname] = useState(false);
+
+    const DuplicatedCheckSuccessCallback = (type, data, variables, context) => {
+        if (type === 'email') {
+            alert('사용 가능한 이메일입니다.');
+            setIsDuplicateEmail(true);
+            return;
+        }
+
+        if (type === 'nickname') {
+            alert('사용 가능한 닉네임입니다.');
+            setIsDuplicateNickname(true);
+            return;
+        }
+    };
+
+    const DuplicatedCheckErrorCallback = (type, error, variable, context) => {
+        const { status } = error.response;
+
+        if (status === 409) {
+            if (type === 'email') {
+                setEmail('');
+                alert('이미 사용중인 이메일입니다.');
+                return;
+            }
+            if (type === 'nickname') {
+                setNickname('');
+                alert('이미 사용중인 닉네임입니다.');
+                return;
+            }
+        }
+
+        alert('다시 시도해주세요.');
+        return;
+    };
+
+    const { mutate: emailMutate } = useDuplicatedCheckMutation(
+        'email',
+        DuplicatedCheckSuccessCallback,
+        DuplicatedCheckErrorCallback
+    );
+
+    const { mutate: nicknameMutate } = useDuplicatedCheckMutation(
+        'nickname',
+        DuplicatedCheckSuccessCallback,
+        DuplicatedCheckErrorCallback
+    );
 
     const onChangeEmailHandler = (e) => {
         const { value } = e.target;
@@ -133,7 +130,7 @@ function SignupForm() {
 
         if (!email) return alert('이메일을 입력해주세요.');
 
-        emailMutation.mutate({ email });
+        emailMutate({ email });
     };
 
     // 닉네임 중복 검사
@@ -147,7 +144,7 @@ function SignupForm() {
 
         if (!nickname) return alert('닉네임을 입력해주세요.');
 
-        nicknameMutation.mutate({ nickname });
+        nicknameMutate({ nickname });
     };
 
     // 회원가입
