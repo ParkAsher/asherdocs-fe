@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { checkEmailDuplicated, checkNicknameDuplicated, signUp } from '../../apis/user.api';
+import { checkEmailDuplicated, checkNicknameDuplicated, login, signUp } from '../../apis/user.api';
 
 // 중복검사
 const useDuplicatedCheckMutation = (type, successCallback, errorCallback) => {
@@ -40,4 +40,13 @@ const useSignupMutation = () => {
     });
 };
 
-export { useDuplicatedCheckMutation, useSignupMutation };
+// 로그인
+const useLoginMutation = (successCallback, errorCallback) => {
+    return useMutation({
+        mutationFn: login,
+        onSuccess: (data) => successCallback(data),
+        onError: (error) => errorCallback(error),
+    });
+};
+
+export { useDuplicatedCheckMutation, useSignupMutation, useLoginMutation };
