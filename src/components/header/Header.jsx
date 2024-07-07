@@ -2,19 +2,37 @@ import React from 'react';
 import styled from 'styled-components';
 import HeaderLogo from './HeaderLogo';
 import Button from '../common/Button';
+import useUserStore from '../../zustand/userStore';
 
 function Header() {
+    const { isLoggedIn, nickname, setLoggedOut } = useUserStore((state) => state);
+
+    const logOut = () => {
+        setLoggedOut();
+
+        window.location.reload();
+    };
+
     return (
         <HeaderBlock>
             <HeaderInnerBlock>
                 <HeaderLogo />
                 <HeaderRight>
-                    <Button to='/signup' $colorname='indigo' $colornumber='3'>
-                        회원가입
-                    </Button>
-                    <Button to='/login' $colorname='indigo' $colornumber='7'>
-                        로그인
-                    </Button>
+                    {isLoggedIn ? (
+                        <>
+                            <span>{nickname}</span>
+                            <Button onClick={logOut}>로그아웃</Button>
+                        </>
+                    ) : (
+                        <>
+                            <Button to='/signup' $colorname='indigo' $colornumber='3'>
+                                회원가입
+                            </Button>
+                            <Button to='/login' $colorname='indigo' $colornumber='7'>
+                                로그인
+                            </Button>
+                        </>
+                    )}
                 </HeaderRight>
             </HeaderInnerBlock>
         </HeaderBlock>
