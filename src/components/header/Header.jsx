@@ -5,7 +5,7 @@ import Button from '../common/Button';
 import useUserStore from '../../zustand/userStore';
 
 function Header() {
-    const { isLoggedIn, nickname, setLoggedOut } = useUserStore((state) => state);
+    const { isLoggedIn, nickname, role, setLoggedOut } = useUserStore((state) => state);
 
     const logOut = () => {
         setLoggedOut();
@@ -21,6 +21,11 @@ function Header() {
                     {isLoggedIn ? (
                         <>
                             <span>{nickname}</span>
+                            {role === 1 ? (
+                                <Button to='/write' $colorname='gray' $colornumber='6'>
+                                    글쓰기
+                                </Button>
+                            ) : null}
                             <Button onClick={logOut}>로그아웃</Button>
                         </>
                     ) : (
