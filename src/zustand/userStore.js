@@ -5,16 +5,18 @@ const useUserStore = create(
     persist(
         (set) => ({
             isLoggedIn: false,
+            id: '',
+            role: null,
             nickname: '',
-            setLoggedIn: (accessToken, userNickname) => {
+            setLoggedIn: (accessToken, userNickname, userId, userRole) => {
                 sessionStorage.setItem('token', accessToken);
 
-                set({ isLoggedIn: true, nickname: userNickname });
+                set({ isLoggedIn: true, nickname: userNickname, id: userId, role: userRole });
             },
             setLoggedOut: () => {
                 sessionStorage.removeItem('token');
 
-                set({ isLoggedIn: false, nickname: '' });
+                set({ isLoggedIn: false, nickname: '', id: '', role: null });
             },
         }),
         {

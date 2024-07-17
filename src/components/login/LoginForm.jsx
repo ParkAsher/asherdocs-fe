@@ -19,9 +19,9 @@ function LoginForm() {
 
     // 로그인 성공
     const loginSuccessCallback = (data) => {
-        const { accessToken, nickname } = data;
+        const { accessToken, nickname, id, role } = data;
 
-        setLoggedIn(accessToken, nickname);
+        setLoggedIn(accessToken, nickname, id, role);
 
         window.location.href = '/';
     };
