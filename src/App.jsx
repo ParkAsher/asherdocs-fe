@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/header/Header';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
+import { Login, Signup, Write } from './pages';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
@@ -13,6 +12,7 @@ function App() {
             <Routes>
                 <Route path='/login' element={<Login />} />
                 <Route path='/signup' element={<Signup />} />
+                <Route path='/write' element={<Write />} />
             </Routes>
         </QueryClientProvider>
     );
