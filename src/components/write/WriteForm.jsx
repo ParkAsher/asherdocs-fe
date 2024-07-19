@@ -1,7 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import WriteCategoryInput from './WriteCategoryInput';
 import useInputs from '../../hooks/useInputs';
+import WriteTitleInput from './WriteTitleInput';
 
 function WriteForm() {
     const [values, handler, resetValue] = useInputs({
@@ -9,6 +10,13 @@ function WriteForm() {
         title: '',
         content: '',
     });
+
+    const titleChangeHandler = useCallback(
+        (e) => {
+            handler(e);
+        },
+        [handler]
+    );
 
     const selectOptionChangeHandler = useCallback(
         (e) => {
@@ -20,6 +28,8 @@ function WriteForm() {
     return (
         <WriteBlock>
             <WriteFormBlock>
+                <WriteFormHeadSpan>제목</WriteFormHeadSpan>
+                <WriteTitleInput handler={titleChangeHandler} />
                 <WriteFormHeadSpan>카테고리</WriteFormHeadSpan>
                 <WriteCategoryInput handler={selectOptionChangeHandler} />
             </WriteFormBlock>

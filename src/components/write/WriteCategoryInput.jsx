@@ -16,7 +16,7 @@ function WriteCategoryInput({ handler }) {
 
     return (
         <CategoryInput defaultValue='0' name='category' onChange={handleChange}>
-            <option value='0' disabled>
+            <option value='0' hidden disabled>
                 (선택안함)
             </option>
             {data?.map((category, idx) => {
@@ -35,7 +35,7 @@ const CategoryInput = styled.select`
     outline: none;
     border-radius: 5px;
     border: 1px solid ${oc.gray[6]};
-    padding: 1rem 0;
+    padding: 1rem;
     font-size: 1.125rem;
     margin-bottom: 3rem;
 `;
