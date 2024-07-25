@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import WriteCategoryInput from './WriteCategoryInput';
 import useInputs from '../../hooks/useInputs';
 import WriteTitleInput from './WriteTitleInput';
+import WriteQuillEditor from './WriteQuillEditor';
 
 function WriteForm() {
     const [values, handler, resetValue] = useInputs({
@@ -25,6 +26,17 @@ function WriteForm() {
         [handler]
     );
 
+    const contentChangeHandler = useCallback(
+        (e) => {
+            handler(e);
+        },
+        [handler]
+    );
+
+    useEffect(() => {
+        console.log(values);
+    }, [values]);
+
     return (
         <WriteBlock>
             <WriteFormBlock>
@@ -32,6 +44,7 @@ function WriteForm() {
                 <WriteTitleInput handler={titleChangeHandler} />
                 <WriteFormHeadSpan>카테고리</WriteFormHeadSpan>
                 <WriteCategoryInput handler={selectOptionChangeHandler} />
+                <WriteQuillEditor handler={contentChangeHandler} />
             </WriteFormBlock>
         </WriteBlock>
     );
