@@ -1,14 +1,19 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import WriteCategoryInput from './WriteCategoryInput';
 import useInputs from '../../hooks/useInputs';
 import WriteTitleInput from './WriteTitleInput';
 import WriteQuillEditor from './WriteQuillEditor';
+import Button from '../common/Button';
+import useUserStore from '../../zustand/userStore';
+import { useWriteMutation } from '../../hooks/queries/article.query';
 
 function WriteForm() {
+    const id = useUserStore((state) => state.id);
+
     const [values, handler, resetValue] = useInputs({
-        category: '',
         title: '',
+        category: '',
         content: '',
     });
 
@@ -33,9 +38,40 @@ function WriteForm() {
         [handler]
     );
 
-    useEffect(() => {
-        console.log(values);
-    }, [values]);
+    const { mutate: writeMutation } = useWriteMutation();
+
+    const handleWriteButtonClick = (e) => {
+        e.preventDefault();
+
+        if (!values.title) {
+            alert('제목을 입력해주세요.');
+            return;
+        }
+
+        if (!values.category) {
+            alert('카테고리를 선택해주세요.');
+            return;
+        }
+
+        if (!values.content) {
+            alert('내용을 입력해주세요.');
+            return;
+        }
+
+        if (!id) {
+            alert('로그인 후 이용해주세요.');
+            return;
+        }
+
+        const writeForm = {
+            title: values.title,
+            categoryId: Number(values.category),
+            content: values.content,
+            userId: id,
+        };
+
+        writeMutation(writeForm);
+    };
 
     return (
         <WriteBlock>
@@ -45,6 +81,12 @@ function WriteForm() {
                 <WriteFormHeadSpan>카테고리</WriteFormHeadSpan>
                 <WriteCategoryInput handler={selectOptionChangeHandler} />
                 <WriteQuillEditor handler={contentChangeHandler} />
+                <WriteFormButtonBlock>
+                    <Button to='/' $colorname='gray' $colornumber='5'>
+                        취소
+                    </Button>
+                    <Button onClick={handleWriteButtonClick}>등록</Button>
+                </WriteFormButtonBlock>
             </WriteFormBlock>
         </WriteBlock>
     );
@@ -53,7 +95,6 @@ function WriteForm() {
 const WriteBlock = styled.div`
     width: 100%;
     min-height: calc(100vh - 4rem);
-    // background-color: green;
 
     display: flex;
     justify-content: center;
@@ -62,14 +103,20 @@ const WriteBlock = styled.div`
 const WriteFormBlock = styled.div`
     width: 1700px;
     padding: 1rem 0;
-
-    //background-color: yellow;
+    margin: 1rem 0;
 `;
 
 const WriteFormHeadSpan = styled.p`
     margin: 0 0 1rem 0;
     font-size: 1.25rem;
     font-weight: bold;
+`;
+
+const WriteFormButtonBlock = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
 `;
 
 export default WriteForm;

@@ -1,9 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef } from 'react';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
+import oc from 'open-color';
 
 hljs.configure({
     languages: ['javascript', 'typescript', 'python', 'java'],
@@ -56,13 +57,21 @@ function WriteQuillEditor({ handler }) {
 
 const ReactQuillEditorStyle = {
     width: '100%',
-    height: '50vh',
 };
 
 const QuillWrapper = styled.div`
+    margin-bottom: 3rem;
+
     .ql-editor {
+        height: 500px;
         font-size: 1rem;
         line-height: 1.5;
+    }
+
+    .ql-container.ql-snow,
+    .ql-toolbar.ql-snow {
+        border-radius: 5px;
+        border: 1px solid ${oc.gray[6]};
     }
 `;
 
