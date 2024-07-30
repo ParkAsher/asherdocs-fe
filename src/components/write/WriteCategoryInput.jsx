@@ -8,6 +8,7 @@ function WriteCategoryInput({ handler }) {
     const { data } = useQuery({
         queryKey: ['categories'],
         queryFn: getCategories,
+        refetchOnWindowFocus: false,
     });
 
     const handleChange = (e) => {
