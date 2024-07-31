@@ -10,7 +10,7 @@ function HeaderLogo() {
                 <LogoImg src={logoImage} />
             </HeaderLogoImgBlock>
             <HeaderLogoTitleBlock>
-                <Link href='/'>AsherDocs</Link>
+                <Link to='/'>AsherDocs</Link>
             </HeaderLogoTitleBlock>
         </HeaderLogoBlock>
     );
