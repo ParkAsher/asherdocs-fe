@@ -1,10 +1,11 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { writeArticle } from '../../apis/article.api';
 import useUserStore from '../../zustand/userStore';
 import { useNavigate } from 'react-router-dom';
 
 // 글 등록하기
 const useWriteMutation = () => {
+    const queryClient = useQueryClient();
     const navigate = useNavigate();
 
     const setLoggedOut = useUserStore((state) => state.setLoggedOut);
@@ -13,6 +14,8 @@ const useWriteMutation = () => {
         mutationFn: writeArticle,
         onSuccess: (data) => {
             alert('글을 등록했습니다.');
+            queryClient.invalidateQueries('categories');
+
             navigate('/');
         },
         onError: (error) => {
