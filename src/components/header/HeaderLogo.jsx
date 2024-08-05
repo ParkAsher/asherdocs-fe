@@ -6,9 +6,6 @@ import Link from '../common/Link';
 function HeaderLogo() {
     return (
         <HeaderLogoBlock>
-            <HeaderLogoImgBlock>
-                <LogoImg src={logoImage} />
-            </HeaderLogoImgBlock>
             <HeaderLogoTitleBlock>
                 <Link to='/'>AsherDocs</Link>
             </HeaderLogoTitleBlock>
@@ -20,16 +17,6 @@ const HeaderLogoBlock = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-`;
-
-const HeaderLogoImgBlock = styled.div`
-    width: 2.5rem;
-    height: 2.5rem;
-`;
-
-const LogoImg = styled.img`
-    width: 100%;
-    height: 100%;
 `;
 
 const HeaderLogoTitleBlock = styled.div`
