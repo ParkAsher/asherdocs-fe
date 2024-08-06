@@ -1,22 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { getCategories } from '../../apis/category.api';
+import { useQuery } from '@tanstack/react-query';
+import oc from 'open-color';
 
-function PostCategoryList({ categories }) {
-    console.log(categories);
+function PostCategoryList({ category: categoryParam }) {
+    // 카테고리 리스트
+    const { data: categories } = useQuery({
+        queryKey: ['categories'],
+        queryFn: getCategories,
+    });
 
     return (
         <CategoryListBlock>
             <CategoryListTitle>카테고리</CategoryListTitle>
             <ul>
-                <CategoryList>
+                <CategoryList $active={categoryParam === undefined}>
                     <Link to={`/`}>전체보기</Link>
                 </CategoryList>
                 {categories?.map((category, idx) => {
+                    const { id, categoryName, contentsCount } = category;
                     return (
-                        <CategoryList key={category.id}>
-                            <Link to={`/?category=${category.categoryName}`}>
-                                {category.categoryName} ({category.contentsCount})
+                        <CategoryList $active={categoryParam === categoryName} key={id}>
+                            <Link to={`/?category=${categoryName}`}>
+                                {categoryName} ({contentsCount})
                             </Link>
                         </CategoryList>
                     );
@@ -48,6 +56,11 @@ const CategoryListTitle = styled.div`
 const CategoryList = styled.li`
     font-size: 1rem;
     line-height: 1.5;
+
+    a {
+        font-weight: ${(props) => (props.$active ? 'bold' : 'normal')};
+        color: ${(props) => (props.$active ? oc.teal[5] : 'black')};
+    }
 `;
 
 export default PostCategoryList;
