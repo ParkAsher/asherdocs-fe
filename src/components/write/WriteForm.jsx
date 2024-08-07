@@ -7,6 +7,7 @@ import WriteQuillEditor from './WriteQuillEditor';
 import Button from '../common/Button';
 import useUserStore from '../../zustand/userStore';
 import { useWriteMutation } from '../../hooks/queries/article.query';
+import WriteThumbnailInput from './WriteThumbnailInput';
 
 function WriteForm() {
     const id = useUserStore((state) => state.id);
@@ -15,6 +16,7 @@ function WriteForm() {
         title: '',
         category: '',
         content: '',
+        thumbnail: '',
     });
 
     const titleChangeHandler = useCallback(
@@ -32,6 +34,13 @@ function WriteForm() {
     );
 
     const contentChangeHandler = useCallback(
+        (e) => {
+            handler(e);
+        },
+        [handler]
+    );
+
+    const thumbnailChangeHandler = useCallback(
         (e) => {
             handler(e);
         },
@@ -67,6 +76,7 @@ function WriteForm() {
             title: values.title,
             categoryId: Number(values.category),
             content: values.content,
+            thumbnail: values.thumbnail,
             userId: id,
         };
 
@@ -80,6 +90,8 @@ function WriteForm() {
                 <WriteTitleInput handler={titleChangeHandler} />
                 <WriteFormHeadSpan>카테고리</WriteFormHeadSpan>
                 <WriteCategoryInput handler={selectOptionChangeHandler} />
+                <WriteFormHeadSpan>썸네일</WriteFormHeadSpan>
+                <WriteThumbnailInput handler={thumbnailChangeHandler} />
                 <WriteQuillEditor handler={contentChangeHandler} />
                 <WriteFormButtonBlock>
                     <Button to='/' $colorname='gray' $colornumber='5'>

@@ -14,8 +14,8 @@ const useWriteMutation = () => {
         mutationFn: writeArticle,
         onSuccess: (data) => {
             alert('글을 등록했습니다.');
-            queryClient.invalidateQueries('categories');
-            queryClient.invalidateQueries('articles');
+            queryClient.invalidateQueries(['categories']);
+            queryClient.invalidateQueries(['articles']);
 
             navigate('/');
         },
