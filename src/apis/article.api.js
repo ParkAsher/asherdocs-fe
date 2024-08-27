@@ -21,7 +21,6 @@ const getArticles = async ({ pageParam, category }) => {
             withCredentials: true,
         }
     );
-    console.log(response.data);
     return response.data;
 };
 

@@ -42,6 +42,7 @@ function PostList({ category }) {
         <>
             {articles.length > 0 ? (
                 articles?.map((article, idx) => {
+                    console.log(article);
                     return (
                         <Item ref={ref} key={article.id}>
                             <h3>{article.title}</h3>
