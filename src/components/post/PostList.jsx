@@ -4,6 +4,7 @@ import { getArticles } from '../../apis/article.api';
 import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
 import oc from 'open-color';
+import PostItem from './PostItem';
 
 const ARTICLES_PER_PAGE = 5;
 
@@ -42,12 +43,7 @@ function PostList({ category }) {
         <>
             {articles.length > 0 ? (
                 articles?.map((article, idx) => {
-                    console.log(article);
-                    return (
-                        <Item ref={ref} key={article.id}>
-                            <h3>{article.title}</h3>
-                        </Item>
-                    );
+                    return <PostItem ref={ref} key={article.id} article={article} />;
                 })
             ) : (
                 <EmptyList>
@@ -67,14 +63,6 @@ const EmptyList = styled.div`
 
     font-size: 2rem;
     color: ${oc.teal[5]};
-`;
-
-const Item = styled.div`
-    width: 100%;
-    padding-bottom: 2rem;
-    margin-bottom: 2rem;
-    line-height: 1.5;
-    border-bottom: 1px solid ${oc.gray[1]};
 `;
 
 export default PostList;
