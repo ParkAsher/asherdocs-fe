@@ -13,7 +13,7 @@ const writeArticle = async (writeForm) => {
     return response.data;
 };
 
-// 글 가져오기
+// 글 목록 가져오기
 const getArticles = async ({ pageParam, category }) => {
     const response = await axios.get(
         `${SERVER_URL}/article?category=${category}&page=${pageParam}`,
@@ -24,4 +24,12 @@ const getArticles = async ({ pageParam, category }) => {
     return response.data;
 };
 
-export { writeArticle, getArticles };
+const getArticle = async (id) => {
+    const response = await axios.get(`${SERVER_URL}/article/${id}`, {
+        withCredentials: true,
+    });
+
+    return response.data;
+};
+
+export { writeArticle, getArticles, getArticle };

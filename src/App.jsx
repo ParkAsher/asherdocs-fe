@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/header/Header';
-import { Login, Signup, Write } from './pages';
+import { Login, Post, Signup, Write } from './pages';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Main from './pages/Main';
 
@@ -23,6 +23,7 @@ function App() {
                 <Route path='/login' element={<Login />} />
                 <Route path='/signup' element={<Signup />} />
                 <Route path='/write' element={<Write />} />
+                <Route path='/article/:id' element={<Post />} />
             </Routes>
         </QueryClientProvider>
     );

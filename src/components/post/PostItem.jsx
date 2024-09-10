@@ -6,11 +6,11 @@ import { FaRegEye } from 'react-icons/fa';
 import { formatDate } from '../../utils/date';
 
 const PostItem = React.forwardRef((props, ref) => {
-    const { thumbnail, title, views, createdAt, category } = props.article;
+    const { id, thumbnail, title, views, createdAt, category } = props.article;
     const { categoryName } = category;
     return (
         <Item ref={ref}>
-            <Link to='/'>
+            <Link to={`/article/${id}`}>
                 <PostThumbnail>
                     <img src={thumbnail} />
                 </PostThumbnail>
