@@ -10,7 +10,7 @@ hljs.configure({
     languages: ['javascript', 'typescript', 'python', 'java'],
 });
 
-function WriteQuillEditor({ handler }) {
+function WriteQuillEditor({ handler, value }) {
     const quillRef = useRef();
 
     const handleChange = (value) => {
@@ -50,6 +50,7 @@ function WriteQuillEditor({ handler }) {
                 theme='snow'
                 modules={modules}
                 onChange={handleChange}
+                value={value}
             ></ReactQuill>
         </QuillWrapper>
     );

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
 
-function WriteTitleInput({ handler }) {
+function WriteTitleInput({ handler, value }) {
     const handleChange = (e) => {
         handler(e);
     };
@@ -13,6 +13,7 @@ function WriteTitleInput({ handler }) {
             name='title'
             onChange={handleChange}
             placeholder='제목을 입력하세요.'
+            value={value}
         />
     );
 }

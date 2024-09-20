@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
 import axios from 'axios';
 
-function WriteThumbnailInput({ handler }) {
+function WriteThumbnailInput({ handler, value }) {
     const [thumbnail, setThumbnail] = useState('');
+
+    useEffect(() => {
+        setThumbnail(value);
+    }, [value]);
 
     // 썸네일 업로드
     const handleChange = async (e) => {

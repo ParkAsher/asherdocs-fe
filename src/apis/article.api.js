@@ -34,8 +34,23 @@ export const getArticle = async (id) => {
 
 // 글 삭제
 export const deleteArticle = async (id) => {
+    const token = sessionStorage.getItem('token') ?? null;
     const response = await axios.delete(`${SERVER_URL}/article/${id}`, {
         withCredentials: true,
+        headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
+};
+
+// 글 수정
+export const editArticle = async (id, editForm) => {
+    console.log(id, editForm);
+
+    const token = sessionStorage.getItem('token') ?? null;
+    const response = await axios.put(`${SERVER_URL}/article/${id}`, editForm, {
+        withCredentials: true,
+        headers: { Authorization: `Bearer ${token}` },
     });
 
     return response.data;

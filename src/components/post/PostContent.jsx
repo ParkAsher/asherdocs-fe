@@ -5,6 +5,7 @@ import { formatDate } from '../../utils/date';
 import oc from 'open-color';
 import useUserStore from '../../zustand/userStore';
 import { useDeleteMutation } from '../../hooks/queries/article.query';
+import { useNavigate } from 'react-router-dom';
 
 function PostContent(props) {
     const { article } = props;
@@ -13,6 +14,12 @@ function PostContent(props) {
     const { isLoggedIn, role } = useUserStore((state) => state);
 
     const { mutate: deleteMutation } = useDeleteMutation(id);
+
+    const navigate = useNavigate();
+
+    const postEditOnClickHandler = () => {
+        navigate(`/edit/${id}`);
+    };
 
     const postDeleteOnClickHandler = () => {
         const check = window.confirm('삭제 하시겠습니까?');
@@ -37,13 +44,13 @@ function PostContent(props) {
                     </div>
                     {isLoggedIn && role === 1 ? (
                         <div className='post-btn-wrap'>
-                            <div>수정</div>
+                            <div onClick={postEditOnClickHandler}>수정</div>
                             <div onClick={postDeleteOnClickHandler}>삭제</div>
                         </div>
                     ) : null}
                 </PostSubInfo>
                 <PostThumbnail>
-                    <img src={thumbnail} />
+                    <img src={thumbnail} alt='thumbnail' />
                 </PostThumbnail>
             </PostHeader>
             <PostContentArea dangerouslySetInnerHTML={{ __html: content }}></PostContentArea>

@@ -4,7 +4,7 @@ import oc from 'open-color';
 import { useQuery } from '@tanstack/react-query';
 import { getCategories } from '../../apis/category.api';
 
-function WriteCategoryInput({ handler }) {
+function WriteCategoryInput({ handler, value }) {
     const { data } = useQuery({
         queryKey: ['categories'],
         queryFn: getCategories,
@@ -15,7 +15,7 @@ function WriteCategoryInput({ handler }) {
     };
 
     return (
-        <CategoryInput defaultValue='0' name='category' onChange={handleChange}>
+        <CategoryInput defaultValue='0' name='category' onChange={handleChange} value={value}>
             <option value='0' hidden disabled>
                 (선택안함)
             </option>
