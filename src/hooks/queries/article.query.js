@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { writeArticle } from '../../apis/article.api';
-import useUserStore from '../../zustand/userStore';
+import { deleteArticle, writeArticle } from '../../apis/article.api';
 import { useNavigate } from 'react-router-dom';
+import { useHandleAuthError } from '../../utils/errorHandlers';
 
 // 글 등록하기
-const useWriteMutation = () => {
+export const useWriteMutation = () => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
-    const setLoggedOut = useUserStore((state) => state.setLoggedOut);
+    const handleAuthError = useHandleAuthError();
 
     return useMutation({
         mutationFn: writeArticle,
@@ -19,18 +19,27 @@ const useWriteMutation = () => {
 
             navigate('/');
         },
-        onError: (error) => {
-            const { status } = error.response;
-
-            if (status === 401) {
-                alert('유효하지 않은 토큰입니다. 다시 로그인해 주세요.');
-                setLoggedOut();
-                navigate('/login');
-            } else {
-                alert('다시 시도해 주세요.');
-            }
-        },
+        onError: handleAuthError,
     });
 };
 
-export { useWriteMutation };
+// 글 삭제
+export const useDeleteMutation = (id) => {
+    const queryClient = useQueryClient();
+    const navigate = useNavigate();
+
+    const handleAuthError = useHandleAuthError();
+
+    return useMutation({
+        mutationFn: () => deleteArticle(id),
+        onSuccess: (data) => {
+            alert('글을 삭제했습니다.');
+            queryClient.invalidateQueries(['categories']);
+            queryClient.invalidateQueries(['articles']);
+            queryClient.invalidateQueries(['article', id]);
+
+            navigate('/');
+        },
+        onError: handleAuthError,
+    });
+};

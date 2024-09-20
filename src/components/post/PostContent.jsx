@@ -3,21 +3,44 @@ import { FaRegEye } from 'react-icons/fa';
 import styled from 'styled-components';
 import { formatDate } from '../../utils/date';
 import oc from 'open-color';
+import useUserStore from '../../zustand/userStore';
+import { useDeleteMutation } from '../../hooks/queries/article.query';
 
 function PostContent(props) {
     const { article } = props;
-    const { title, category, content, thumbnail, createdAt, views } = article;
+    const { id, title, category, content, thumbnail, createdAt, views } = article;
+
+    const { isLoggedIn, role } = useUserStore((state) => state);
+
+    const { mutate: deleteMutation } = useDeleteMutation(id);
+
+    const postDeleteOnClickHandler = () => {
+        const check = window.confirm('삭제 하시겠습니까?');
+
+        if (!check) return;
+
+        // 글 삭제
+        deleteMutation();
+    };
 
     return (
         <PostContentWrap>
             <PostHeader>
                 <div className='title'>{title}</div>
                 <PostSubInfo>
-                    <div className='views'>
-                        <FaRegEye /> {views}
+                    <div className='info'>
+                        <div className='views'>
+                            <FaRegEye /> {views}
+                        </div>
+                        <div className='category-name'>{category.categoryName}</div>
+                        <div className='created-at'>{formatDate(createdAt)}</div>
                     </div>
-                    <div className='category-name'>{category.categoryName}</div>
-                    <div className='created-at'>{formatDate(createdAt)}</div>
+                    {isLoggedIn && role === 1 ? (
+                        <div className='post-btn-wrap'>
+                            <div>수정</div>
+                            <div onClick={postDeleteOnClickHandler}>삭제</div>
+                        </div>
+                    ) : null}
                 </PostSubInfo>
                 <PostThumbnail>
                     <img src={thumbnail} />
@@ -48,13 +71,27 @@ const PostSubInfo = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: space-between;
     color: ${oc.gray[6]};
 
-    .views {
+    .info {
         display: flex;
         align-items: center;
+        gap: 0.5rem;
+
+        .views {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+    }
+
+    .post-btn-wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         gap: 0.3rem;
+        cursor: pointer;
     }
 `;
 
