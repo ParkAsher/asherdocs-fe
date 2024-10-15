@@ -105,7 +105,7 @@ const PostSubInfo = styled.div`
 const PostThumbnail = styled.div`
     width: 100%;
     height: 500px;
-    margin-bottom: 2rem;
+    margin: 2rem 0;
 
     img {
         width: 100%;

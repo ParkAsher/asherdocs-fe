@@ -15,7 +15,7 @@ const PostItem = React.forwardRef((props, ref) => {
                     <img src={thumbnail} />
                 </PostThumbnail>
             </Link>
-            <Link to='/'>
+            <Link to={`/article/${id}`}>
                 <h2>{title}</h2>
             </Link>
             <PostSubInfo>
