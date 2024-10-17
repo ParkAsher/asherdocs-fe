@@ -7,8 +7,7 @@ import { formatDate } from '../../utils/date';
 
 const PostItem = React.forwardRef((props, ref) => {
     const { id, thumbnail, title, views, createdAt, category } = props.article;
-    console.log(props.article);
-    // const { categoryName } = category;
+    const { categoryName } = category;
 
     return (
         <Item ref={ref}>
@@ -24,8 +23,8 @@ const PostItem = React.forwardRef((props, ref) => {
                 <div className='views'>
                     <FaRegEye /> {views}
                 </div>
-                {/* <div className='category-name'>{categoryName}</div> */}
-                {/* <div className='created-at'>{formatDate(createdAt)}</div> */}
+                <div className='category-name'>{categoryName}</div>
+                <div className='created-at'>{formatDate(createdAt)}</div>
             </PostSubInfo>
         </Item>
     );
