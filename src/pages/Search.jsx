@@ -1,20 +1,20 @@
 import React from 'react';
 import ResponsiveContainer from '../components/common/ResponsiveContainer';
 import PostListContainer from '../components/post/PostListContainer';
-import PostListWrap from '../components/post/PostListWrap';
 import SearchForm from '../components/search/SearchForm';
+import SearchListWrap from '../components/search/SearchListWrap';
 
-function Main() {
+function Search() {
     return (
         <div>
             <SearchForm />
             <ResponsiveContainer>
                 <PostListContainer>
-                    <PostListWrap />
+                    <SearchListWrap />
                 </PostListContainer>
             </ResponsiveContainer>
         </div>
     );
 }
 
-export default Main;
+export default Search;

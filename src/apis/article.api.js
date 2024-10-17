@@ -55,3 +55,14 @@ export const editArticle = async (id, editForm) => {
 
     return response.data;
 };
+
+// 글 검색
+export const getSearchArticles = async ({ pageParam, keyword }) => {
+    const response = await axios.get(
+        `${SERVER_URL}/article/search?keyword=${keyword}&page=${pageParam}`,
+        {
+            withCredentials: true,
+        }
+    );
+    return response.data;
+};
