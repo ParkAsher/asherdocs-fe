@@ -16,6 +16,8 @@ function PostCategoryList({ category: categoryParam }) {
 
     if (isLoading) return;
 
+    const categoryList = Array.isArray(categories) ? categories : [];
+
     return (
         <CategoryListBlock>
             <CategoryListTitle>카테고리</CategoryListTitle>
@@ -23,17 +25,16 @@ function PostCategoryList({ category: categoryParam }) {
                 <CategoryList $active={categoryParam === undefined}>
                     <Link to={`/`}>전체보기</Link>
                 </CategoryList>
-                {categories &&
-                    categories.map((category, idx) => {
-                        const { id, categoryName, contentsCount } = category;
-                        return (
-                            <CategoryList $active={categoryParam === categoryName} key={id}>
-                                <Link to={`/?category=${categoryName}`}>
-                                    {categoryName} ({contentsCount})
-                                </Link>
-                            </CategoryList>
-                        );
-                    })}
+                {categoryList.map((category, idx) => {
+                    const { id, categoryName, contentsCount } = category;
+                    return (
+                        <CategoryList $active={categoryParam === categoryName} key={id}>
+                            <Link to={`/?category=${categoryName}`}>
+                                {categoryName} ({contentsCount})
+                            </Link>
+                        </CategoryList>
+                    );
+                })}
             </ul>
         </CategoryListBlock>
     );
