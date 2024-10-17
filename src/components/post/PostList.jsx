@@ -42,7 +42,8 @@ function PostList({ category }) {
     return (
         <>
             {articles.length > 0 ? (
-                articles?.map((article, idx) => {
+                articles &&
+                articles.map((article, idx) => {
                     return <PostItem ref={ref} key={article.id} article={article} />;
                 })
             ) : (

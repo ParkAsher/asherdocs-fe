@@ -12,6 +12,8 @@ function PostCategoryList({ category: categoryParam }) {
         queryFn: getCategories,
     });
 
+    console.log(categories);
+
     if (isLoading) return;
 
     return (
