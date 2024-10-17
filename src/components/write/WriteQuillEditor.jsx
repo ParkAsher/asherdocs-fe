@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css';
 import ReactQuill from 'react-quill';
@@ -10,17 +10,25 @@ hljs.configure({
     languages: ['javascript', 'typescript', 'python', 'java'],
 });
 
-function WriteQuillEditor({ handler, value }) {
+function WriteQuillEditor({ handler, content }) {
     const quillRef = useRef();
 
-    const handleChange = (value) => {
-        const e = {
+    const [value, setValue] = useState('');
+
+    useEffect(() => {
+        if (content) setValue(content);
+    }, []);
+
+    const handleChange = (e) => {
+        setValue(e);
+
+        const a = {
             target: {
                 name: 'content',
                 value: value,
             },
         };
-        handler(e);
+        handler(a);
     };
 
     const modules = useMemo(
@@ -49,7 +57,7 @@ function WriteQuillEditor({ handler, value }) {
                 style={ReactQuillEditorStyle}
                 theme='snow'
                 modules={modules}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
                 value={value}
             ></ReactQuill>
         </QuillWrapper>

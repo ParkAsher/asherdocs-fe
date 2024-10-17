@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import useInputs from '../../hooks/useInputs';
 import styled from 'styled-components';
 import Button from '../common/Button';
 import WriteTitleInput from '../write/WriteTitleInput';
 import WriteCategoryInput from '../write/WriteCategoryInput';
 import WriteThumbnailInput from '../write/WriteThumbnailInput';
-import WriteQuillEditor from '../write/WriteQuillEditor';
 import { useEditMutation } from '../../hooks/queries/article.query';
+import WriteQuillEditor from '../write/WriteQuillEditor';
 
 function EditForm(props) {
     const { article } = props;
@@ -92,7 +92,7 @@ function EditForm(props) {
                 <WriteCategoryInput handler={selectOptionChangeHandler} value={values.category} />
                 <WriteFormHeadSpan>썸네일</WriteFormHeadSpan>
                 <WriteThumbnailInput handler={thumbnailChangeHandler} value={values.thumbnail} />
-                <WriteQuillEditor handler={contentChangeHandler} value={values.content} />
+                <WriteQuillEditor handler={contentChangeHandler} content={values.content} />
                 <WriteFormButtonBlock>
                     <Button to='/' $colorname='gray' $colornumber='5'>
                         취소
