@@ -7,10 +7,12 @@ import oc from 'open-color';
 
 function PostCategoryList({ category: categoryParam }) {
     // 카테고리 리스트
-    const { data: categories } = useQuery({
+    const { data: categories, isLoading } = useQuery({
         queryKey: ['categories'],
         queryFn: getCategories,
     });
+
+    if (isLoading) return;
 
     return (
         <CategoryListBlock>
@@ -19,16 +21,17 @@ function PostCategoryList({ category: categoryParam }) {
                 <CategoryList $active={categoryParam === undefined}>
                     <Link to={`/`}>전체보기</Link>
                 </CategoryList>
-                {categories?.map((category, idx) => {
-                    const { id, categoryName, contentsCount } = category;
-                    return (
-                        <CategoryList $active={categoryParam === categoryName} key={id}>
-                            <Link to={`/?category=${categoryName}`}>
-                                {categoryName} ({contentsCount})
-                            </Link>
-                        </CategoryList>
-                    );
-                })}
+                {categories &&
+                    categories.map((category, idx) => {
+                        const { id, categoryName, contentsCount } = category;
+                        return (
+                            <CategoryList $active={categoryParam === categoryName} key={id}>
+                                <Link to={`/?category=${categoryName}`}>
+                                    {categoryName} ({contentsCount})
+                                </Link>
+                            </CategoryList>
+                        );
+                    })}
             </ul>
         </CategoryListBlock>
     );
