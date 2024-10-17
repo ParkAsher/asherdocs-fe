@@ -17,7 +17,7 @@ function WriteThumbnailInput({ handler, value }) {
 
         try {
             const response = await axios.post(
-                'http://localhost:5000/image/thumbnail/upload',
+                `${process.env.REACT_APP_SERVER_URL}/image/thumbnail/upload`,
                 formData
             );
 
