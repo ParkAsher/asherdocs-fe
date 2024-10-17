@@ -39,11 +39,12 @@ function PostList({ category }) {
         return;
     }
 
+    const articleList = Array.isArray(articles) ? articles : [];
+
     return (
         <>
-            {articles.length > 0 ? (
-                articles &&
-                articles.map((article, idx) => {
+            {articleList.length > 0 ? (
+                articleList.map((article, idx) => {
                     return <PostItem ref={ref} key={article.id} article={article} />;
                 })
             ) : (
