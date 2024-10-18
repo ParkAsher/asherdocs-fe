@@ -53,7 +53,9 @@ function PostContent(props) {
                     <img src={thumbnail} alt='thumbnail' />
                 </PostThumbnail>
             </PostHeader>
-            <PostContentArea dangerouslySetInnerHTML={{ __html: content }}></PostContentArea>
+            <div className='ql-snow'>
+                <div className='view ql-editor' dangerouslySetInnerHTML={{ __html: content }}></div>
+            </div>
         </PostContentWrap>
     );
 }
