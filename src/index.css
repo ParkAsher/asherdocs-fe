@@ -1,5 +1,4 @@
 /* font */
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+IS:wght@100..400&family=Playwrite+PL:wght@100..400&display=swap');
 @font-face {
     font-family: 'Pretendard-Regular';
     src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
@@ -13,7 +12,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('./reset.css');
 body {
     margin: 0;
     font-family: 'Pretendard-Regular', sans-serif !important;
