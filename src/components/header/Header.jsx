@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import HeaderLogo from './HeaderLogo';
-import Button from '../common/Button';
 import useUserStore from '../../zustand/userStore';
+import Link from '../common/Link';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
     const { isLoggedIn, nickname, role, setLoggedOut } = useUserStore((state) => state);
+
+    const navigate = useNavigate();
 
     const logOut = () => {
         setLoggedOut();
@@ -13,42 +15,93 @@ function Header() {
         window.location.reload();
     };
 
+    const navigateLoginButtonClickHandler = () => {
+        navigate('/login');
+    };
+
+    const navigateSignUpButtonClickHandler = () => {
+        navigate('/signup');
+    };
+
+    const navigateWriteButtonClickHandler = () => {
+        navigate('/write');
+    };
+
     return (
-        <HeaderBlock>
-            <HeaderInnerBlock>
-                <HeaderLogo />
-                <HeaderRight>
+        <div className='w-full h-[4rem] bg-white border-b border-solid border-gray-300'>
+            <div className='flex items-center justify-between h-full px-3 mx-auto my-0 w-[1700px] xxl:w-[1300px] xl:w-[1024px] lg:w-full'>
+                <div className='flex items-center h-full text-2xl font-bold'>
+                    <Link to='/'>AsherDocs</Link>
+                </div>
+                <div className='flex items-center justify-between gap-2'>
                     {isLoggedIn ? (
                         <>
-                            <span>{nickname}</span>
                             {role === 1 ? (
-                                <Button to='/write' $colorname='gray' $colornumber='6'>
+                                <button
+                                    onClick={navigateWriteButtonClickHandler}
+                                    className='px-3 py-2 font-bold border border-box border-solid border-gray-800 rounded-md'
+                                >
                                     글쓰기
-                                </Button>
+                                </button>
                             ) : null}
-                            <Button onClick={logOut}>로그아웃</Button>
+                            <button
+                                onClick={logOut}
+                                className='px-3 py-2 font-bold text-white border border-box border-solid border-gray-800 bg-gray-800 rounded-md'
+                            >
+                                로그아웃
+                            </button>
                         </>
                     ) : (
                         <>
-                            <Button to='/signup' $colorname='indigo' $colornumber='3'>
-                                회원가입
-                            </Button>
-                            <Button to='/login' $colorname='indigo' $colornumber='7'>
+                            <button
+                                onClick={navigateLoginButtonClickHandler}
+                                className='px-3 py-2 font-bold border border-box border-solid border-gray-800 rounded-md'
+                            >
                                 로그인
-                            </Button>
+                            </button>
+                            <button
+                                onClick={navigateSignUpButtonClickHandler}
+                                className='px-3 py-2 font-bold text-white border border-box border-solid border-gray-800 bg-gray-800 rounded-md'
+                            >
+                                회원가입
+                            </button>
                         </>
                     )}
-                </HeaderRight>
-            </HeaderInnerBlock>
-        </HeaderBlock>
+                </div>
+            </div>
+        </div>
     );
-}
 
-const HeaderBlock = styled.div`
-    width: 100%;
-    height: 4rem;
-    box-shadow: 0px 0 8px rgba(0, 0, 0, 0.08);
-`;
+    // return (
+    //     <HeaderBlock>
+    //         <HeaderInnerBlock>
+    //             <HeaderLogo />
+    //             <HeaderRight>
+    //                 {isLoggedIn ? (
+    //                     <>
+    //                         <span>{nickname}</span>
+    //                         {role === 1 ? (
+    //                             <Button to='/write' $colorname='gray' $colornumber='6'>
+    //                                 글쓰기
+    //                             </Button>
+    //                         ) : null}
+    //                         <Button onClick={logOut}>로그아웃</Button>
+    //                     </>
+    //                 ) : (
+    //                     <>
+    //                         <Button to='/signup' $colorname='indigo' $colornumber='3'>
+    //                             회원가입
+    //                         </Button>
+    //                         <Button to='/login' $colorname='indigo' $colornumber='7'>
+    //                             로그인
+    //                         </Button>
+    //                     </>
+    //                 )}
+    //             </HeaderRight>
+    //         </HeaderInnerBlock>
+    //     </HeaderBlock>
+    // );
+}
 
 const HeaderInnerBlock = styled.div`
     width: 1700px;
