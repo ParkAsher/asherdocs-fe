@@ -1,6 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
-import oc from 'open-color';
 import Link from '../common/Link';
 import { FaRegEye } from 'react-icons/fa';
 import { formatDate } from '../../utils/date';
@@ -10,70 +8,24 @@ const PostItem = React.forwardRef((props, ref) => {
     const { categoryName } = category;
 
     return (
-        <Item ref={ref}>
+        <div className='w-full pb-8 mb-8 border-b border-solid border-gray-300' ref={ref}>
             <Link to={`/article/${id}`}>
-                <PostThumbnail>
-                    <img src={thumbnail} />
-                </PostThumbnail>
+                <div className='w-full h-[500px] mb-4'>
+                    <img className='w-full h-full object-cover' src={thumbnail} alt='asherdocs' />
+                </div>
             </Link>
             <Link to={`/article/${id}`}>
-                <h2>{title}</h2>
+                <div className='text-2xl font-bold break-all mb-2 xl:px-2'>{title}</div>
             </Link>
-            <PostSubInfo>
-                <div className='views'>
+            <div className='w-full flex items-center flex-wrap gap-2 text-gray-500 xl:px-2'>
+                <div className='flex items-center gap-1'>
                     <FaRegEye /> {views}
                 </div>
                 <div className='category-name'>{categoryName}</div>
                 <div className='created-at'>{formatDate(createdAt)}</div>
-            </PostSubInfo>
-        </Item>
+            </div>
+        </div>
     );
 });
-
-const Item = styled.div`
-    width: 100%;
-    padding-bottom: 2rem;
-    margin-bottom: 2rem;
-    line-height: 1.5;
-    border-bottom: 1px solid ${oc.gray[1]};
-
-    &:last-child {
-        border-bottom: none;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        word-break: keep-all;
-        font-weight: bold;
-    }
-`;
-
-const PostThumbnail = styled.div`
-    width: 100%;
-    height: 500px;
-    margin-bottom: 2rem;
-
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
-`;
-
-const PostSubInfo = styled.div`
-    width: 100%;
-    color: ${oc.gray[5]};
-
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-
-    .views {
-        display: flex;
-        align-items: center;
-        gap: 0.3rem;
-    }
-`;
 
 export default PostItem;

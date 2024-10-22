@@ -2,8 +2,6 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import React from 'react';
 import { getArticles } from '../../apis/article.api';
 import { useInView } from 'react-intersection-observer';
-import styled from 'styled-components';
-import oc from 'open-color';
 import PostItem from './PostItem';
 
 const ARTICLES_PER_PAGE = 5;
@@ -48,23 +46,12 @@ function PostList({ category }) {
                     return <PostItem ref={ref} key={article.id} article={article} />;
                 })
             ) : (
-                <EmptyList>
+                <div className='w-full flex items-center justify-center text-2xl font-bold text-blue-500'>
                     <div>게시글이 존재하지 않습니다.</div>
-                </EmptyList>
+                </div>
             )}
         </>
     );
 }
-
-const EmptyList = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 3rem;
-
-    font-size: 2rem;
-    color: ${oc.teal[5]};
-`;
 
 export default PostList;

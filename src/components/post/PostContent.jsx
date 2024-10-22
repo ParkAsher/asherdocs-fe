@@ -6,6 +6,7 @@ import oc from 'open-color';
 import useUserStore from '../../zustand/userStore';
 import { useDeleteMutation } from '../../hooks/queries/article.query';
 import { useNavigate } from 'react-router-dom';
+import CommentForm from '../comment/CommentForm';
 
 function PostContent(props) {
     const { article } = props;
@@ -31,32 +32,38 @@ function PostContent(props) {
     };
 
     return (
-        <PostContentWrap>
-            <PostHeader>
-                <div className='title'>{title}</div>
-                <PostSubInfo>
-                    <div className='info'>
-                        <div className='views'>
-                            <FaRegEye /> {views}
+        <>
+            <PostContentWrap>
+                <PostHeader>
+                    <div className='title'>{title}</div>
+                    <PostSubInfo>
+                        <div className='info'>
+                            <div className='views'>
+                                <FaRegEye /> {views}
+                            </div>
+                            <div className='category-name'>{category.categoryName}</div>
+                            <div className='created-at'>{formatDate(createdAt)}</div>
                         </div>
-                        <div className='category-name'>{category.categoryName}</div>
-                        <div className='created-at'>{formatDate(createdAt)}</div>
-                    </div>
-                    {isLoggedIn && role === 1 ? (
-                        <div className='post-btn-wrap'>
-                            <div onClick={postEditOnClickHandler}>수정</div>
-                            <div onClick={postDeleteOnClickHandler}>삭제</div>
-                        </div>
-                    ) : null}
-                </PostSubInfo>
-                <PostThumbnail>
-                    <img src={thumbnail} alt='thumbnail' />
-                </PostThumbnail>
-            </PostHeader>
-            <div className='ql-snow'>
-                <div className='view ql-editor' dangerouslySetInnerHTML={{ __html: content }}></div>
-            </div>
-        </PostContentWrap>
+                        {isLoggedIn && role === 1 ? (
+                            <div className='post-btn-wrap'>
+                                <div onClick={postEditOnClickHandler}>수정</div>
+                                <div onClick={postDeleteOnClickHandler}>삭제</div>
+                            </div>
+                        ) : null}
+                    </PostSubInfo>
+                    <PostThumbnail>
+                        <img src={thumbnail} alt='thumbnail' />
+                    </PostThumbnail>
+                </PostHeader>
+                <div className='ql-snow'>
+                    <div
+                        className='view ql-editor'
+                        dangerouslySetInnerHTML={{ __html: content }}
+                    ></div>
+                </div>
+            </PostContentWrap>
+            <CommentForm />
+        </>
     );
 }
 

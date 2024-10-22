@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import PostCategoryList from './PostCategoryList';
 import PostList from './PostList';
 import qs from 'qs';
@@ -10,17 +9,11 @@ function PostListWrap() {
     const { category } = qs.parse(location.search, { ignoreQueryPrefix: true });
 
     return (
-        <PostListBlock>
+        <div className='w-full h-fit relative mt-8'>
             <PostCategoryList category={category} />
             <PostList category={category} />
-        </PostListBlock>
+        </div>
     );
 }
-
-const PostListBlock = styled.div`
-    width: 100%;
-    padding-top: 30px;
-    position: relative;
-`;
 
 export default PostListWrap;
