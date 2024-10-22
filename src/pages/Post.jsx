@@ -3,8 +3,6 @@ import PostContent from '../components/post/PostContent';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getArticle } from '../apis/article.api';
-import ResponsiveContainer from '../components/common/ResponsiveContainer';
-import PostListContainer from '../components/post/PostListContainer';
 
 function Post() {
     const { id } = useParams();
@@ -19,11 +17,11 @@ function Post() {
     }
 
     return (
-        <ResponsiveContainer>
-            <PostListContainer>
+        <div className='w-full'>
+            <div className='mx-auto my-0 w-[800px] lg:w-full lg:px-2'>
                 <PostContent article={article} />
-            </PostListContainer>
-        </ResponsiveContainer>
+            </div>
+        </div>
     );
 }
 

@@ -33,83 +33,43 @@ function PostContent(props) {
 
     return (
         <>
-            <PostContentWrap>
-                <PostHeader>
-                    <div className='title'>{title}</div>
-                    <PostSubInfo>
-                        <div className='info'>
-                            <div className='views'>
+            <div className='w-full mt-4'>
+                <div className='w-full'>
+                    <div className='font-bold text-4xl break-all mb-8 sm:text-xl'>{title}</div>
+                    <div className='w-full flex items-center justify-between text-gray-400 sm:text-sm'>
+                        <div className='flex flex-wrap items-center gap-2'>
+                            <div className='flex flex-wrap items-center gap-1'>
                                 <FaRegEye /> {views}
                             </div>
                             <div className='category-name'>{category.categoryName}</div>
                             <div className='created-at'>{formatDate(createdAt)}</div>
                         </div>
                         {isLoggedIn && role === 1 ? (
-                            <div className='post-btn-wrap'>
+                            <div className='flex items-center justify-between gap-2 cursor-pointer sm:text-sm'>
                                 <div onClick={postEditOnClickHandler}>수정</div>
                                 <div onClick={postDeleteOnClickHandler}>삭제</div>
                             </div>
                         ) : null}
-                    </PostSubInfo>
-                    <PostThumbnail>
-                        <img src={thumbnail} alt='thumbnail' />
-                    </PostThumbnail>
-                </PostHeader>
-                <div className='ql-snow'>
+                    </div>
+                    <div className='my-8 w-full h-[500px] sm:h-[300px]'>
+                        <img
+                            className='w-full h-full object-cover'
+                            src={thumbnail}
+                            alt='thumbnail'
+                        />
+                    </div>
+                </div>
+                <div className='ql-snow sm:text-sm'>
                     <div
-                        className='view ql-editor'
+                        className='view ql-editor !p-0'
                         dangerouslySetInnerHTML={{ __html: content }}
                     ></div>
                 </div>
-            </PostContentWrap>
+            </div>
             {/* <CommentForm /> */}
         </>
     );
 }
-
-const PostContentWrap = styled.div`
-    margin-top: 2rem;
-`;
-
-const PostHeader = styled.div`
-    width: 100%;
-
-    .title {
-        font-size: 2.5rem;
-        font-weight: bold;
-        word-break: keep-all;
-        overflow-wrap: break-word;
-        margin-bottom: 2rem;
-    }
-`;
-
-const PostSubInfo = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: ${oc.gray[6]};
-
-    .info {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-
-        .views {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-    }
-
-    .post-btn-wrap {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 0.3rem;
-        cursor: pointer;
-    }
-`;
 
 const PostThumbnail = styled.div`
     width: 100%;
