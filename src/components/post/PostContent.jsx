@@ -6,7 +6,7 @@ import oc from 'open-color';
 import useUserStore from '../../zustand/userStore';
 import { useDeleteMutation } from '../../hooks/queries/article.query';
 import { useNavigate } from 'react-router-dom';
-import CommentForm from '../comment/CommentForm';
+// import CommentForm from '../comment/CommentForm';
 
 function PostContent(props) {
     const { article } = props;
@@ -62,7 +62,7 @@ function PostContent(props) {
                     ></div>
                 </div>
             </PostContentWrap>
-            <CommentForm />
+            {/* <CommentForm /> */}
         </>
     );
 }
