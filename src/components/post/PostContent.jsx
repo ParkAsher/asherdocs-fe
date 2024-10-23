@@ -1,6 +1,5 @@
 import React from 'react';
 import { FaRegEye } from 'react-icons/fa';
-import styled from 'styled-components';
 import { formatDate } from '../../utils/date';
 import useUserStore from '../../zustand/userStore';
 import { useDeleteMutation } from '../../hooks/queries/article.query';
@@ -65,7 +64,7 @@ function PostContent(props) {
                     ></div>
                 </div>
             </div>
-            <CommentForm />
+            <CommentForm articleId={id} />
         </>
     );
 }
