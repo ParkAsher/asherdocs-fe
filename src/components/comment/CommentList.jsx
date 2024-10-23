@@ -14,7 +14,7 @@ function CommentList({ articleId }) {
         isFetchingNextPage,
         isLoading,
     } = useInfiniteQuery({
-        queryKey: ['comment', articleId],
+        queryKey: ['comments', articleId],
         initialPageParam: 1,
         queryFn: ({ pageParam }) => getComments({ pageParam, articleId }),
         getNextPageParam: (lastPage, allPages, lastPageParam) => {
@@ -42,7 +42,14 @@ function CommentList({ articleId }) {
     return (
         <div className='w-full mt-8'>
             {commentList.map((comment, idx) => {
-                return <CommentItem ref={ref} key={comment.id} comment={comment} />;
+                return (
+                    <CommentItem
+                        ref={ref}
+                        key={comment.id}
+                        articleId={articleId}
+                        comment={comment}
+                    />
+                );
             })}
         </div>
     );

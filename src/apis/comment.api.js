@@ -19,3 +19,14 @@ export const getComments = async ({ pageParam, articleId }) => {
 
     return response.data;
 };
+
+// 댓글 삭제
+export const deleteComment = async (commentId) => {
+    const token = sessionStorage.getItem('token') ?? null;
+    const response = await axios.delete(`${SERVER_URL}/comment/${commentId}`, {
+        withCredentials: true,
+        headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
+};

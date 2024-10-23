@@ -11,7 +11,7 @@ function CommentForm({ articleId }) {
         setComment(e.target.value);
     };
 
-    const { mutate: commentWriteMutation } = useCommentWriteMutation();
+    const { mutate: commentWriteMutation } = useCommentWriteMutation(articleId);
 
     const commentWriteButtonClickHandler = (e) => {
         e.preventDefault();
