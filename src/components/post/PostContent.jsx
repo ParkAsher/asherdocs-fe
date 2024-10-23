@@ -5,6 +5,7 @@ import useUserStore from '../../zustand/userStore';
 import { useDeleteMutation } from '../../hooks/queries/article.query';
 import { useNavigate } from 'react-router-dom';
 import CommentForm from '../comment/CommentForm';
+import CommentList from '../comment/CommentList';
 
 function PostContent(props) {
     const { article } = props;
@@ -65,6 +66,7 @@ function PostContent(props) {
                 </div>
             </div>
             <CommentForm articleId={id} />
+            <CommentList articleId={id} />
         </>
     );
 }

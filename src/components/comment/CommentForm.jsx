@@ -31,7 +31,7 @@ function CommentForm({ articleId }) {
     };
 
     return (
-        <div className='w-full py-8 border-b border-solid border-gray-300'>
+        <div className='w-full py-8'>
             <textarea
                 onChange={commentChangeHandler}
                 className='w-full h-[80px] px-2 py-3 mb-4 border border-solid border-gray-300 rounded-sm resize-none outline-none'
