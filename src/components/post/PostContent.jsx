@@ -2,11 +2,10 @@ import React from 'react';
 import { FaRegEye } from 'react-icons/fa';
 import styled from 'styled-components';
 import { formatDate } from '../../utils/date';
-import oc from 'open-color';
 import useUserStore from '../../zustand/userStore';
 import { useDeleteMutation } from '../../hooks/queries/article.query';
 import { useNavigate } from 'react-router-dom';
-// import CommentForm from '../comment/CommentForm';
+import CommentForm from '../comment/CommentForm';
 
 function PostContent(props) {
     const { article } = props;
@@ -33,7 +32,7 @@ function PostContent(props) {
 
     return (
         <>
-            <div className='w-full mt-4'>
+            <div className='w-full py-8 border-b border-solid border-gray-300'>
                 <div className='w-full'>
                     <div className='font-bold text-4xl break-all mb-8 sm:text-xl'>{title}</div>
                     <div className='w-full flex items-center justify-between text-gray-400 sm:text-sm'>
@@ -66,23 +65,9 @@ function PostContent(props) {
                     ></div>
                 </div>
             </div>
-            {/* <CommentForm /> */}
+            <CommentForm />
         </>
     );
 }
-
-const PostThumbnail = styled.div`
-    width: 100%;
-    height: 500px;
-    margin: 2rem 0;
-
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
-`;
-
-const PostContentArea = styled.div``;
 
 export default PostContent;
