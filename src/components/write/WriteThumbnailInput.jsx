@@ -15,10 +15,17 @@ function WriteThumbnailInput({ handler, value }) {
         let formData = new FormData();
         formData.append('thumbnail', e.target.files[0]);
 
+        // 토큰
+        const token = sessionStorage.getItem('token') ?? null;
+
         try {
             const response = await axios.post(
                 `${process.env.REACT_APP_SERVER_URL}/image/thumbnail/upload`,
-                formData
+                formData,
+                {
+                    withCredentials: true,
+                    headers: { Authorization: `Bearer ${token}` },
+                }
             );
 
             const e = {
