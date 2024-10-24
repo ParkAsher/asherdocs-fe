@@ -44,7 +44,7 @@ function SearchPostList({ keyword }) {
                     return <PostItem ref={ref} key={article.id} article={article} />;
                 })
             ) : (
-                <div className='w-full flex items-center justify-center mt-12 text-3xl text-blue-500'>
+                <div className='w-full flex items-center justify-center text-2xl font-bold text-blue-500'>
                     <div>게시글이 존재하지 않습니다.</div>
                 </div>
             )}
