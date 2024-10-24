@@ -30,3 +30,14 @@ export const deleteComment = async (commentId) => {
 
     return response.data;
 };
+
+// 댓글 수정
+export const editComment = async (commentId, editForm) => {
+    const token = sessionStorage.getItem('token') ?? null;
+    const response = await axios.patch(`${SERVER_URL}/comment/${commentId}`, editForm, {
+        withCredentials: true,
+        headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
+};
