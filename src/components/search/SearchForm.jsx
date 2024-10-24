@@ -20,20 +20,23 @@ function SearchForm() {
     };
 
     return (
-        <div className='w-full h-12 my-5 flex justify-center items-center gap-2'>
-            <input
-                type='search'
-                className='h-full px-4 text-base border border-gray-300 rounded-lg focus:outline-none'
-                placeholder='검색'
-                onChange={keywordOnchangeHandler}
-            />
-            <button
-                type='submit'
-                className='px-4 h-full text-white bg-blue-500 rounded-lg font-bold'
-                onClick={SearchButtonClickHandler}
-            >
-                <IoSearch />
-            </button>
+        <div className='w-full my-5 flex justify-center items-center md:px-4'>
+            <div className='relative flex items-center w-full max-w-sm'>
+                <input
+                    type='text'
+                    className='w-full py-2 pr-10 pl-4 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500'
+                    placeholder='검색'
+                    onChange={keywordOnchangeHandler}
+                />
+                <div
+                    onClick={SearchButtonClickHandler}
+                    className='absolute inset-y-0 right-0 flex items-center pr-3'
+                >
+                    <button>
+                        <IoSearch />
+                    </button>
+                </div>
+            </div>
         </div>
     );
 }
