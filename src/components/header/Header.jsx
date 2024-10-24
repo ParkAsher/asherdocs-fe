@@ -1,18 +1,21 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
 import useUserStore from '../../zustand/userStore';
 import Link from '../common/Link';
 import { useNavigate } from 'react-router-dom';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import SideMenu from './SideMenu';
 
 function Header() {
     const { isLoggedIn, nickname, role, setLoggedOut } = useUserStore((state) => state);
+
+    const [isSideOpen, setIsSideOpen] = useState(false);
 
     const navigate = useNavigate();
 
     const logOut = () => {
         setLoggedOut();
 
-        window.location.reload();
+        window.location.href = '/';
     };
 
     const navigateLoginButtonClickHandler = () => {
@@ -27,13 +30,42 @@ function Header() {
         navigate('/write');
     };
 
+    const sideOpenButtonClickHandler = () => {
+        setIsSideOpen(!isSideOpen);
+    };
+
     return (
-        <div className='w-full h-[4rem] bg-white border-b border-solid border-gray-300'>
+        <div className='relative w-full h-[4rem] bg-white border-b border-solid border-gray-300'>
+            {/* Sidebar */}
+            {isSideOpen ? (
+                <SideMenu
+                    nickname={nickname}
+                    isLoggedIn={isLoggedIn}
+                    handler={sideOpenButtonClickHandler}
+                    logout={logOut}
+                />
+            ) : null}
+
+            {/* Overlay */}
+            {isSideOpen && (
+                <div
+                    onClick={sideOpenButtonClickHandler}
+                    className='fixed inset-0 bg-gray-500 bg-opacity-5 backdrop-blur-sm z-10'
+                ></div>
+            )}
+
+            {/* Header */}
             <div className='flex items-center justify-between h-full px-3 mx-auto my-0 w-[1700px] xxl:w-[1300px] xl:w-[1024px] lg:w-full'>
                 <div className='flex items-center h-full text-2xl font-bold'>
                     <Link to='/'>AsherDocs</Link>
                 </div>
-                <div className='flex items-center justify-between gap-2'>
+                <div
+                    onClick={sideOpenButtonClickHandler}
+                    className='hidden cursor-pointer md:block'
+                >
+                    <GiHamburgerMenu size='32' />
+                </div>
+                <div className='flex items-center justify-between gap-2 md:hidden'>
                     {isLoggedIn ? (
                         <>
                             {role === 1 ? (
@@ -71,52 +103,6 @@ function Header() {
             </div>
         </div>
     );
-
-    // return (
-    //     <HeaderBlock>
-    //         <HeaderInnerBlock>
-    //             <HeaderLogo />
-    //             <HeaderRight>
-    //                 {isLoggedIn ? (
-    //                     <>
-    //                         <span>{nickname}</span>
-    //                         {role === 1 ? (
-    //                             <Button to='/write' $colorname='gray' $colornumber='6'>
-    //                                 글쓰기
-    //                             </Button>
-    //                         ) : null}
-    //                         <Button onClick={logOut}>로그아웃</Button>
-    //                     </>
-    //                 ) : (
-    //                     <>
-    //                         <Button to='/signup' $colorname='indigo' $colornumber='3'>
-    //                             회원가입
-    //                         </Button>
-    //                         <Button to='/login' $colorname='indigo' $colornumber='7'>
-    //                             로그인
-    //                         </Button>
-    //                     </>
-    //                 )}
-    //             </HeaderRight>
-    //         </HeaderInnerBlock>
-    //     </HeaderBlock>
-    // );
 }
-
-const HeaderInnerBlock = styled.div`
-    width: 1700px;
-    margin: 0 auto;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-`;
-
-const HeaderRight = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.25rem;
-`;
 
 export default Header;
