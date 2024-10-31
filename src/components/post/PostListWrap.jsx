@@ -9,7 +9,7 @@ function PostListWrap() {
     const { category } = qs.parse(location.search, { ignoreQueryPrefix: true });
 
     return (
-        <div className='w-full h-fit relative mt-8'>
+        <div className='w-full h-fit relative mt-8 xl:mt-0'>
             <PostCategoryList category={category} />
             <PostList category={category} />
         </div>
