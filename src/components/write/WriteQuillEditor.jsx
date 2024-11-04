@@ -5,6 +5,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
 import oc from 'open-color';
+import axios from 'axios';
 
 hljs.configure({
     languages: ['javascript', 'typescript', 'python', 'java'],
@@ -31,6 +32,42 @@ function WriteQuillEditor({ handler, content }) {
         handler(a);
     };
 
+    // Image Upload Handler
+    const imageUploadHandler = async () => {
+        const input = document.createElement('input');
+
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.click();
+
+        input.addEventListener('change', async () => {
+            const file = input.files[0];
+
+            let formData = new FormData();
+            formData.append('image', file);
+
+            const token = sessionStorage.getItem('token') ?? null;
+
+            try {
+                const response = await axios.post(
+                    `${process.env.REACT_APP_SERVER_URL}/image/upload`,
+                    formData,
+                    {
+                        withCredentials: true,
+                        headers: { Authorization: `Bearer ${token}` },
+                    }
+                );
+
+                const editor = quillRef.current.getEditor();
+                const range = editor.getSelection();
+
+                editor.insertEmbed(range.index, 'image', response.data);
+            } catch (error) {
+                console.log(error);
+            }
+        });
+    };
+
     const modules = useMemo(
         () => ({
             syntax: { highlight: (text) => hljs.highlightAuto(text).value },
@@ -44,7 +81,11 @@ function WriteQuillEditor({ handler, content }) {
                     [{ list: 'ordered' }, { list: 'bullet' }],
                     ['bold', 'italic', 'underline', 'strike'],
                     ['blockquote', 'code-block'],
+                    ['link', 'image'],
                 ],
+                handlers: {
+                    image: imageUploadHandler,
+                },
             },
         }),
         []
