@@ -6,6 +6,7 @@ import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
 import oc from 'open-color';
 import axios from 'axios';
+import imageCompression from 'browser-image-compression';
 
 hljs.configure({
     languages: ['javascript', 'typescript', 'python', 'java'],
@@ -43,12 +44,20 @@ function WriteQuillEditor({ handler, content }) {
         input.addEventListener('change', async () => {
             const file = input.files[0];
 
-            let formData = new FormData();
-            formData.append('image', file);
-
+            // 이미지 압축 옵션
+            const options = {
+                maxSizeMB: 1,
+                maxWidthOrHeight: 1200,
+                useWebWorker: true,
+            };
             const token = sessionStorage.getItem('token') ?? null;
 
             try {
+                const compressedFile = await imageCompression(file, options);
+
+                let formData = new FormData();
+                formData.append('image', compressedFile);
+
                 const response = await axios.post(
                     `${process.env.REACT_APP_SERVER_URL}/image/upload`,
                     formData,

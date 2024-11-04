@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.2.1",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.2",
+    "browser-image-compression": "^2.0.2",
     "highlight.js": "^11.10.0",
     "open-color": "^1.9.1",
     "postcss": "^8.4.47",
