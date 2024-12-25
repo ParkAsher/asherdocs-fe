@@ -35,7 +35,7 @@ function Header() {
     };
 
     return (
-        <div className='relative w-full h-[4rem] bg-white border-b border-solid border-gray-300'>
+        <div className='relative w-full h-[4rem] bg-white'>
             {/* Sidebar */}
             {isSideOpen ? (
                 <SideMenu
@@ -55,7 +55,7 @@ function Header() {
             )}
 
             {/* Header */}
-            <div className='flex items-center justify-between h-full px-3 mx-auto my-0 w-[1700px] xxl:w-[1300px] xl:w-[1024px] lg:w-full'>
+            <div className='flex items-center justify-between h-full mx-auto my-0 w-[1700px] xl:px-3 xxl:w-[1300px] xl:w-[1024px] lg:w-full'>
                 <div className='flex items-center h-full text-2xl font-bold'>
                     <Link to='/'>AsherDocs</Link>
                 </div>

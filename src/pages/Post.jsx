@@ -17,7 +17,7 @@ function Post() {
     }
 
     return (
-        <div className='w-full'>
+        <div className='w-full border-t border-solid border-gray-200'>
             <div className='mx-auto my-0 w-[800px] lg:w-full lg:px-2'>
                 <PostContent article={article} />
             </div>

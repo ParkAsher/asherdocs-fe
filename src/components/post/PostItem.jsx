@@ -8,16 +8,16 @@ const PostItem = React.forwardRef((props, ref) => {
     const { categoryName } = category;
 
     return (
-        <div className='w-full pb-8 mb-8 border-b border-solid border-gray-300' ref={ref}>
+        <div className='w-full bg-white rounded mb-4' ref={ref}>
             <Link to={`/article/${id}`}>
-                <div className='w-full h-[500px] mb-4'>
-                    <img className='w-full h-full object-cover' src={thumbnail} alt='asherdocs' />
+                <div className='w-full h-[500px] p-2 rounded'>
+                    <img className='w-full h-full object-contain' src={thumbnail} alt='asherdocs' />
                 </div>
             </Link>
             <Link to={`/article/${id}`}>
-                <div className='text-2xl font-bold break-all mb-2 xl:px-2'>{title}</div>
+                <div className='text-2xl p-2 font-bold break-all xl:px-2'>{title}</div>
             </Link>
-            <div className='w-full flex items-center flex-wrap gap-2 text-gray-500 xl:px-2'>
+            <div className='w-full p-2 flex items-center flex-wrap gap-2 text-gray-500 xl:px-2'>
                 <div className='flex items-center gap-1'>
                     <FaRegEye /> {views}
                 </div>
