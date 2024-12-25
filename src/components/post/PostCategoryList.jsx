@@ -15,7 +15,7 @@ function PostCategoryList({ category: categoryParam }) {
     const categoryList = Array.isArray(categories) ? categories : [];
 
     return (
-        <div className='absolute bg-white rounded -left-[200px] w-[180px] xl:relative xl:w-full xl:left-auto xl:mb-8 xl:p-4 xl:border-b xl:border-solid xl:border-gray-300'>
+        <div className='absolute bg-white rounded -left-[196px] w-[180px] xl:relative xl:w-full xl:left-auto xl:mb-8 xl:p-4 xl:border-b xl:border-solid xl:border-gray-300'>
             <div className='text-lg font-bold px-2 py-4 border-b border-solid border-gray-200 xl:hidden'>
                 카테고리
             </div>

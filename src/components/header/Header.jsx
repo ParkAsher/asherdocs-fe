@@ -55,8 +55,8 @@ function Header() {
             )}
 
             {/* Header */}
-            <div className='flex items-center justify-between h-full mx-auto my-0 w-[1700px] xl:px-3 xxl:w-[1300px] xl:w-[1024px] lg:w-full'>
-                <div className='flex items-center h-full text-2xl font-bold'>
+            <div className='flex items-center justify-between h-full mx-auto my-0 w-[1400px] xl:px-3 xxl:w-[1300px] xl:w-[1024px] lg:w-full'>
+                <div className='flex items-center h-full text-2xl font-bold lg:text-xl'>
                     <Link to='/'>AsherDocs</Link>
                 </div>
                 <div

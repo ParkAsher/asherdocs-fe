@@ -15,9 +15,9 @@ const PostItem = React.forwardRef((props, ref) => {
                 </div>
             </Link>
             <Link to={`/article/${id}`}>
-                <div className='text-2xl p-2 font-bold break-all xl:px-2'>{title}</div>
+                <div className='text-2xl p-2 font-bold break-all xl:px-2 xl:text-lg'>{title}</div>
             </Link>
-            <div className='w-full p-2 flex items-center flex-wrap gap-2 text-gray-500 xl:px-2'>
+            <div className='w-full p-2 flex items-center flex-wrap gap-2 text-gray-500 xl:px-2 xl:text-xs'>
                 <div className='flex items-center gap-1'>
                     <FaRegEye /> {views}
                 </div>
