@@ -9,7 +9,7 @@ import CommentList from '../comment/CommentList';
 
 function PostContent(props) {
     const { article } = props;
-    const { id, title, category, content, thumbnail, createdAt, views } = article;
+    const { id, title, category, userId: authorId, content, thumbnail, createdAt, views } = article;
 
     const { isLoggedIn, role } = useUserStore((state) => state);
 
@@ -65,7 +65,7 @@ function PostContent(props) {
                     ></div>
                 </div>
             </div>
-            <CommentForm articleId={id} />
+            {isLoggedIn && <CommentForm articleId={id} authorId={authorId} />}
             <CommentList articleId={id} />
         </>
     );

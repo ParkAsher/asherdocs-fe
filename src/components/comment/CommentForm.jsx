@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useCommentWriteMutation } from '../../hooks/queries/comment.query';
 import useUserStore from '../../zustand/userStore';
 
-function CommentForm({ articleId }) {
+function CommentForm({ articleId, authorId }) {
     const id = useUserStore((state) => state.id);
 
     const [comment, setComment] = useState('');
@@ -24,6 +24,7 @@ function CommentForm({ articleId }) {
         const commentForm = {
             userId: id,
             articleId,
+            receiverId: authorId,
             comment,
         };
 

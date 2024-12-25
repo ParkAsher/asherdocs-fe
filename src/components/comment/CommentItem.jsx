@@ -11,7 +11,7 @@ const CommentItem = React.forwardRef((props, ref) => {
 
     const articleId = props.articleId;
     const { id: commentId, comment, createdAt, user } = props.comment;
-    const { id: userId, nickname } = user;
+    const { id: commentAuthorId, nickname: commentAuthorNickname } = user;
 
     const [isEdit, setIsEdit] = useState(false);
     const [editComment, setEditComment] = useState(comment);
@@ -51,20 +51,20 @@ const CommentItem = React.forwardRef((props, ref) => {
 
     return (
         <div className='w-full py-6 border-b border-solid border-gray-300'>
-            <div className='flex justify-between items-align mb-4'>
+            <div className='flex justify-between items-align'>
                 <div className=''>
-                    <div className='text-lg font-bold sm:text-base'>{nickname}</div>
+                    <div className='text-lg font-bold sm:text-base'>{commentAuthorNickname}</div>
                     <div className='text-sm text-gray-400 sm:text-xs'>{formatDate(createdAt)}</div>
                 </div>
-                {isLoggedIn && id === userId ? (
-                    <div className='flex items-align justify-between flex-wrap gap-2 cursor-pointer text-gray-400 sm:text-sm'>
+                {isLoggedIn && id === commentAuthorId ? (
+                    <div className='flex items-align justify-between flex-wrap gap-2 cursor-pointer text-gray-400 text-base sm:text-sm'>
                         {!isEdit ? <div onClick={commentEditFormOpenHandler}>수정</div> : null}
                         <div onClick={commentDeleteOnClickHandler}>삭제</div>
                     </div>
                 ) : null}
             </div>
             {!isEdit ? (
-                <div className='text-lg sm:text-sm'>
+                <div className='py-3 text-base sm:text-sm'>
                     <div className='break-words break-keep'>
                         <p>{comment}</p>
                     </div>
