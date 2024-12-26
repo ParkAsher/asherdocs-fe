@@ -25,7 +25,7 @@ function SearchForm() {
                 <div className='relative flex items-center w-full max-w-sm'>
                     <input
                         type='text'
-                        className='w-full bg-gray-200 py-2 pr-10 pl-4 text-gray-700 bg-white rounded focus:outline-none'
+                        className='w-full bg-gray-200 py-2 pr-10 pl-4 text-gray-700 rounded focus:outline-none'
                         placeholder='검색'
                         onChange={keywordOnchangeHandler}
                     />
