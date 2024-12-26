@@ -4,9 +4,18 @@ import Link from '../common/Link';
 import { useNavigate } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import SideMenu from './SideMenu';
+import { AiOutlineBell } from 'react-icons/ai';
+import { useQuery } from '@tanstack/react-query';
+import { getHasNewNotifications } from '../../apis/notification.api';
 
 function Header() {
     const { isLoggedIn, nickname, role, setLoggedOut } = useUserStore((state) => state);
+
+    const { data, isLoading } = useQuery({
+        queryKey: ['hasNewNotifications'],
+        queryFn: getHasNewNotifications,
+        enabled: !!isLoggedIn,
+    });
 
     const [isSideOpen, setIsSideOpen] = useState(false);
 
@@ -59,15 +68,32 @@ function Header() {
                 <div className='flex items-center h-full text-2xl font-bold lg:text-xl'>
                     <Link to='/'>AsherDocs</Link>
                 </div>
-                <div
-                    onClick={sideOpenButtonClickHandler}
-                    className='hidden cursor-pointer md:block'
-                >
-                    <GiHamburgerMenu size='32' />
+                <div className='flex items-center gap-2'>
+                    {isLoggedIn && (
+                        <div className='relative cursor-pointer hidden md:block'>
+                            <AiOutlineBell size='32' />
+                            {data?.hasNewNotifications && (
+                                <span className='absolute top-[-10px] right-[-10px] w-2 h-2 bg-red-500 rounded-full'></span>
+                            )}
+                        </div>
+                    )}
+                    <div
+                        onClick={sideOpenButtonClickHandler}
+                        className='hidden cursor-pointer md:block'
+                    >
+                        <GiHamburgerMenu size='32' />
+                    </div>
                 </div>
-                <div className='flex items-center justify-between gap-2 md:hidden'>
+
+                <div className='relative flex items-center justify-between gap-2 md:hidden'>
                     {isLoggedIn ? (
                         <>
+                            <div className='relative cursor-pointer'>
+                                <AiOutlineBell size='32' />
+                                {data?.hasNewNotifications && (
+                                    <span className='absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full'></span>
+                                )}
+                            </div>
                             {role === 1 ? (
                                 <button
                                     onClick={navigateWriteButtonClickHandler}
