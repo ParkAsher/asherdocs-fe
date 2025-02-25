@@ -3,7 +3,8 @@ import Header from './components/header/Header';
 import { Login, Post, Signup, Write, Main, Edit, Notification } from './pages';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Search from './pages/Search';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { HelmetProvider } from 'react-helmet-async';
+import Meta from './components/meta/Meta';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -16,24 +17,23 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+    const title = '민쓱 블로그 | MINSSEUG BLOG';
+    const description = '개발자 민쓱의 블로그입니다';
+    const keywords = '민쓱, minsseug, 개발자, 개발, 블로그, Node.js, NestJS, React, NextJS, 일상';
+    const imgSrc = '/logo.png';
+    const url = 'https://asherdocs.com';
+    const type = 'website';
+
     return (
         <HelmetProvider>
-            <Helmet>
-                <title>AsherDocs</title>
-                <meta name='description' content='개발자 Asher의 블로그' />
-
-                <link rel='icon' href='/favicon.ico' type='image/x-icon' />
-                <link rel='icon' href='/favicon-32x32.png' sizes='32x32' />
-                <link rel='icon' href='/favicon-16x16.png' sizes='16x16' />
-
-                <meta property='og:type' content='website' />
-                <meta property='og:title' content='AsherDocs' />
-                <meta property='og:description' content='개발자 Asher의 블로그.' />
-                <meta property='og:image' content='https://asherdocs.com/logo.png' />
-                <meta property='og:image:width' content='1200' />
-                <meta property='og:image:height' content='630' />
-                <meta property='og:url' content='https://asherdocs.com' />
-            </Helmet>
+            <Meta
+                title={title}
+                description={description}
+                keywords={keywords}
+                imgSrc={imgSrc}
+                url={url}
+                type={type}
+            />
             <QueryClientProvider client={queryClient}>
                 <Header />
                 <Routes>
