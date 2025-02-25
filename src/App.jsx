@@ -17,9 +17,9 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-    const title = '민쓱 블로그 | MINSSEUG BLOG';
-    const description = '개발자 민쓱의 블로그입니다';
-    const keywords = '민쓱, minsseug, 개발자, 개발, 블로그, Node.js, NestJS, React, NextJS, 일상';
+    const title = 'AsherDocs';
+    const description = '개발자 Asher의 블로그입니다';
+    const keywords = 'Asher, AsherDocs, 개발자, 개발, 블로그, Node.js, NestJS, React, NextJS, 일상';
     const imgSrc = '/logo.png';
     const url = 'https://asherdocs.com';
     const type = 'website';

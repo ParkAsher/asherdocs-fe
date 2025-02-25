@@ -21,9 +21,9 @@ function Post() {
     return (
         <>
             <Meta
-                title={`${article.title} | MINSSEUG`}
+                title={`${article.title} | ASHERDOCS`}
                 description={`${stripHtmlTags(article.content).slice(0, 150)}`}
-                keywords={`민쓱, minsseug, 개발, 개발자, 블로그, ${article.category.categoryName}`}
+                keywords={`Asher, AsherDocs, 개발, 개발자, 블로그, ${article.category.categoryName}`}
                 imgSrc={`${article.thumbnail}`}
                 url={`https://asherdocs.com/article/${article.id}`}
             />
