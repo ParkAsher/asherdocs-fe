@@ -22,16 +22,16 @@ function SideMenu({ nickname, isLoggedIn, handler, logout }) {
 
     return (
         <div className='fixed top-0 right-0 w-1/3 h-screen z-20 bg-white sm:w-full'>
-            <div className='h-[4rem] px-2 flex justify-between items-center border-b border-solid border-gray-300'>
+            <div className='h-[4rem] px-2 flex justify-between items-center bg-[#262626] border-b border-solid border-gray-300'>
                 {isLoggedIn ? (
-                    <div className='font-bold'>
+                    <div className='font-bold text-white'>
                         <p>{nickname} 님 안녕하세요!</p>
                     </div>
                 ) : (
                     <div></div>
                 )}
                 <div onClick={handler} className='cursor-pointer'>
-                    <IoClose size='32' />
+                    <IoClose size='32' className='text-white' />
                 </div>
             </div>
             {isLoggedIn ? (
