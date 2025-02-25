@@ -10,9 +10,9 @@ const PostItem = React.forwardRef((props, ref) => {
     return (
         <div className='w-full bg-white mb-4 rounded' ref={ref}>
             <Link to={`/article/${id}`}>
-                <div className='w-full h-full rounded md:aspect-w-8 md:aspect-h-5'>
+                <div className='w-full h-full rounded md:aspect-w-8 md:aspect-h-5 md:rounded-none'>
                     <img
-                        className='w-[800px] h-[500px] object-cover rounded lg:w-full lg:h-full'
+                        className='w-[800px] h-[500px] object-cover rounded lg:w-full lg:h-full lg:rounded-none'
                         src={thumbnail}
                         alt='asherdocs'
                     />

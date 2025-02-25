@@ -21,7 +21,7 @@ function SearchForm() {
 
     return (
         <div className='w-full pt-4 bg-[#eeeeee] flex justify-center items-center'>
-            <div className='w-[800px] bg-white py-4 flex items-center justify-center rounded lg:w-full'>
+            <div className='w-[800px] bg-white py-4 flex items-center justify-center rounded lg:w-full lg:px-2'>
                 <div className='relative flex items-center w-full max-w-sm'>
                     <input
                         type='text'

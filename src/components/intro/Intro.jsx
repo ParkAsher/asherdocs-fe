@@ -5,8 +5,8 @@ import { IoMdMail } from 'react-icons/io';
 
 function Intro() {
     return (
-        <div className='w-full bg-[#eeeeee] pt-4'>
-            <div className='flex items-center justify-center flex-wrap gap-5 bg-white py-10 mx-auto my-0 rounded w-[800px] lg:w-full'>
+        <div className='w-full bg-[#eeeeee] pt-4 lg:pt-0'>
+            <div className='flex items-center justify-center flex-wrap gap-5 bg-white py-10 mx-auto my-0 rounded w-[800px] lg:w-full lg:py-6'>
                 <div className='h-40 w-40'>
                     <img className='w-full h-full' src={logoImage} />
                 </div>
