@@ -18,12 +18,6 @@ function Meta(props) {
             <meta property='og:url' content={url} />
             <meta property='og:type' content={type} />
 
-            {/* google-site-verification */}
-            <meta
-                name='google-site-verification'
-                content='72D6v2CmetIWVSaBldbMskBzvw-Tj9t1edzVg6sGGI0'
-            />
-
             <link rel='icon' href='/favicon.ico' type='image/x-icon' />
             <link rel='icon' href='/favicon-32x32.png' sizes='32x32' />
             <link rel='icon' href='/favicon-16x16.png' sizes='16x16' />
