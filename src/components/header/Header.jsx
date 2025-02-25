@@ -48,7 +48,7 @@ function Header() {
     };
 
     return (
-        <div className='relative w-full h-[4rem] bg-white'>
+        <div className='relative w-full h-[4rem] bg-[#262626]'>
             {/* Sidebar */}
             {isSideOpen ? (
                 <SideMenu
@@ -69,7 +69,7 @@ function Header() {
 
             {/* Header */}
             <div className='flex items-center justify-between h-full mx-auto my-0 w-[1400px] xl:px-3 xxl:w-[1300px] xl:w-[1024px] lg:w-full'>
-                <div className='flex items-center h-full text-2xl font-bold lg:text-xl'>
+                <div className='flex items-center h-full text-2xl text-white font-bold lg:text-xl'>
                     <Link to='/'>AsherDocs</Link>
                 </div>
                 <div className='flex items-center gap-2'>
@@ -78,7 +78,7 @@ function Header() {
                             className='relative cursor-pointer hidden md:block'
                             onClick={navigateNotificationButtonClickHandler}
                         >
-                            <AiOutlineBell size='32' />
+                            <AiOutlineBell size='32' className='text-white' />
                             {data?.hasNewNotifications && (
                                 <span className='absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full'></span>
                             )}
@@ -88,7 +88,7 @@ function Header() {
                         onClick={sideOpenButtonClickHandler}
                         className='hidden cursor-pointer md:block'
                     >
-                        <GiHamburgerMenu size='32' />
+                        <GiHamburgerMenu size='32' className='text-white' />
                     </div>
                 </div>
 
@@ -99,7 +99,7 @@ function Header() {
                                 className='relative cursor-pointer'
                                 onClick={navigateNotificationButtonClickHandler}
                             >
-                                <AiOutlineBell size='32' />
+                                <AiOutlineBell size='32' className='text-white' />
                                 {data?.hasNewNotifications && (
                                     <span className='absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full'></span>
                                 )}
@@ -107,15 +107,12 @@ function Header() {
                             {role === 1 ? (
                                 <button
                                     onClick={navigateWriteButtonClickHandler}
-                                    className='px-3 py-2 font-bold border border-box border-solid border-gray-800 rounded-md'
+                                    className='px-3 py-2 font-bold text-white'
                                 >
                                     글쓰기
                                 </button>
                             ) : null}
-                            <button
-                                onClick={logOut}
-                                className='px-3 py-2 font-bold text-white border border-box border-solid border-gray-800 bg-gray-800 rounded-md'
-                            >
+                            <button onClick={logOut} className='px-3 py-2 font-bold text-white'>
                                 로그아웃
                             </button>
                         </>
@@ -123,13 +120,13 @@ function Header() {
                         <>
                             <button
                                 onClick={navigateLoginButtonClickHandler}
-                                className='px-3 py-2 font-bold border border-box border-solid border-gray-800 rounded-md'
+                                className='px-3 py-2 font-bold text-white'
                             >
                                 로그인
                             </button>
                             <button
                                 onClick={navigateSignUpButtonClickHandler}
-                                className='px-3 py-2 font-bold text-white border border-box border-solid border-gray-800 bg-gray-800 rounded-md'
+                                className='px-3 py-2 font-bold text-white'
                             >
                                 회원가입
                             </button>
