@@ -11,5 +11,8 @@ module.exports = {
             sm: { max: '768px' },
         },
     },
-    plugins: [],
+    corePlugins: {
+        aspectRatio: false,
+    },
+    plugins: [require('@tailwindcss/aspect-ratio')],
 };
