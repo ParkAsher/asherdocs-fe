@@ -39,6 +39,10 @@ function Header() {
         navigate('/write');
     };
 
+    const navigateNotificationButtonClickHandler = () => {
+        navigate('/notification');
+    };
+
     const sideOpenButtonClickHandler = () => {
         setIsSideOpen(!isSideOpen);
     };
@@ -70,10 +74,13 @@ function Header() {
                 </div>
                 <div className='flex items-center gap-2'>
                     {isLoggedIn && (
-                        <div className='relative cursor-pointer hidden md:block'>
+                        <div
+                            className='relative cursor-pointer hidden md:block'
+                            onClick={navigateNotificationButtonClickHandler}
+                        >
                             <AiOutlineBell size='32' />
                             {data?.hasNewNotifications && (
-                                <span className='absolute top-[-10px] right-[-10px] w-2 h-2 bg-red-500 rounded-full'></span>
+                                <span className='absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full'></span>
                             )}
                         </div>
                     )}
@@ -88,7 +95,10 @@ function Header() {
                 <div className='relative flex items-center justify-between gap-2 md:hidden'>
                     {isLoggedIn ? (
                         <>
-                            <div className='relative cursor-pointer'>
+                            <div
+                                className='relative cursor-pointer'
+                                onClick={navigateNotificationButtonClickHandler}
+                            >
                                 <AiOutlineBell size='32' />
                                 {data?.hasNewNotifications && (
                                     <span className='absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full'></span>

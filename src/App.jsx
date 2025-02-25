@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/header/Header';
-import { Login, Post, Signup, Write, Main, Edit } from './pages';
+import { Login, Post, Signup, Write, Main, Edit, Notification } from './pages';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Search from './pages/Search';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
@@ -44,6 +44,7 @@ function App() {
                     <Route path='/article/:id' element={<Post />} />
                     <Route path='/edit/:id' element={<Edit />} />
                     <Route path='/search' element={<Search />} />
+                    <Route path='/notification' element={<Notification />} />
                 </Routes>
             </QueryClientProvider>
         </HelmetProvider>
