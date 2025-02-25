@@ -20,12 +20,12 @@ function SearchForm() {
     };
 
     return (
-        <div className='w-full pt-4 bg-gray-200 flex justify-center items-center'>
+        <div className='w-full pt-4 bg-[#eeeeee] flex justify-center items-center'>
             <div className='w-[800px] bg-white py-4 flex items-center justify-center rounded lg:w-full'>
                 <div className='relative flex items-center w-full max-w-sm'>
                     <input
                         type='text'
-                        className='w-full bg-gray-200 py-2 pr-10 pl-4 text-gray-700 rounded focus:outline-none'
+                        className='w-full bg-[#eeeeee] py-2 pr-10 pl-4 text-gray-700 rounded focus:outline-none'
                         placeholder='검색'
                         onChange={keywordOnchangeHandler}
                     />
