@@ -7,6 +7,7 @@ import WriteCategoryInput from '../write/WriteCategoryInput';
 import WriteThumbnailInput from '../write/WriteThumbnailInput';
 import { useEditMutation } from '../../hooks/queries/article.query';
 import WriteQuillEditor from '../write/WriteQuillEditor';
+import WriteTipTapEditor from '../editor/WriteTipTapEditor';
 
 function EditForm(props) {
     const { article } = props;
@@ -84,45 +85,26 @@ function EditForm(props) {
     };
 
     return (
-        <WriteBlock>
-            <WriteFormBlock>
-                <WriteFormHeadSpan>제목</WriteFormHeadSpan>
-                <WriteTitleInput handler={titleChangeHandler} value={values.title} />
-                <WriteFormHeadSpan>카테고리</WriteFormHeadSpan>
+        <div className='w-full flex justify-center'>
+            <div className='w-[800px] py-4 my-4 md:w-full md:px-2'>
                 <WriteCategoryInput handler={selectOptionChangeHandler} value={values.category} />
-                <WriteFormHeadSpan>썸네일</WriteFormHeadSpan>
+                <WriteTitleInput handler={titleChangeHandler} value={values.title} />
+                <WriteTipTapEditor
+                    handler={contentChangeHandler}
+                    editable={true}
+                    content={values.content}
+                />
                 <WriteThumbnailInput handler={thumbnailChangeHandler} value={values.thumbnail} />
-                <WriteQuillEditor handler={contentChangeHandler} content={values.content} />
                 <WriteFormButtonBlock>
                     <Button to='/' $colorname='gray' $colornumber='5'>
                         취소
                     </Button>
                     <Button onClick={handleEditButtonClick}>수정</Button>
                 </WriteFormButtonBlock>
-            </WriteFormBlock>
-        </WriteBlock>
+            </div>
+        </div>
     );
 }
-
-const WriteBlock = styled.div`
-    width: 100%;
-    min-height: calc(100vh - 4rem);
-
-    display: flex;
-    justify-content: center;
-`;
-
-const WriteFormBlock = styled.div`
-    width: 1700px;
-    padding: 1rem 0;
-    margin: 1rem 0;
-`;
-
-const WriteFormHeadSpan = styled.p`
-    margin: 0 0 1rem 0;
-    font-size: 1.25rem;
-    font-weight: bold;
-`;
 
 const WriteFormButtonBlock = styled.div`
     display: flex;

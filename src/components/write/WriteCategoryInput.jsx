@@ -1,6 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
-import oc from 'open-color';
 import { useQuery } from '@tanstack/react-query';
 import { getCategories } from '../../apis/category.api';
 
@@ -15,29 +13,27 @@ function WriteCategoryInput({ handler, value }) {
     };
 
     return (
-        <CategoryInput defaultValue='0' name='category' onChange={handleChange} value={value}>
-            <option value='0' hidden disabled>
-                (선택안함)
-            </option>
-            {data?.map((category, idx) => {
-                return (
-                    <option key={idx} value={category.id}>
-                        {category.categoryName}
-                    </option>
-                );
-            })}
-        </CategoryInput>
+        <div className='w-full mb-4'>
+            <select
+                className='border border-solid border-black p-2 rounded text-sm outline-none md:text-xs md:p-1'
+                defaultValue='0'
+                name='category'
+                onChange={handleChange}
+                value={value}
+            >
+                <option value='0' hidden disabled>
+                    카테고리
+                </option>
+                {data?.map((category, idx) => {
+                    return (
+                        <option key={idx} value={category.id}>
+                            {category.categoryName}
+                        </option>
+                    );
+                })}
+            </select>
+        </div>
     );
 }
-
-const CategoryInput = styled.select`
-    width: 50%;
-    outline: none;
-    border-radius: 5px;
-    border: 1px solid ${oc.gray[6]};
-    padding: 1rem;
-    font-size: 1.125rem;
-    margin-bottom: 3rem;
-`;
 
 export default WriteCategoryInput;

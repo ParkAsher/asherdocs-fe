@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import oc from 'open-color';
 import axios from 'axios';
 
 function WriteThumbnailInput({ handler, value }) {
@@ -43,30 +41,16 @@ function WriteThumbnailInput({ handler, value }) {
     };
 
     return (
-        <ThumbnailInputBlock>
-            <ThumbnailInput type='file' accept='image/*' onChange={handleChange} />
-            {thumbnail ? <ThumbnailImage src={thumbnail} /> : null}
-        </ThumbnailInputBlock>
+        <div className='w-full mb-[1.5rem]'>
+            <input
+                className='w-full p-[1rem] outline-none text-sm border border-solid border-gray-300'
+                type='file'
+                accept='image/*'
+                onChange={handleChange}
+            />
+            {thumbnail ? <img className='mt-[1rem] w-[4rem] h-[4rem]' src={thumbnail} /> : null}
+        </div>
     );
 }
-
-const ThumbnailInputBlock = styled.div`
-    margin-bottom: 2rem;
-`;
-
-const ThumbnailInput = styled.input`
-    width: 100%;
-    padding: 1rem;
-    outline: none;
-    font-size: 1.125rem;
-    border-radius: 5px;
-    border: 1px solid ${oc.gray[6]};
-`;
-
-const ThumbnailImage = styled.img`
-    margin-top: 1rem;
-    width: 4rem;
-    height: 4rem;
-`;
 
 export default WriteThumbnailInput;

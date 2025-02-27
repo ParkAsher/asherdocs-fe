@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FaRegEye } from 'react-icons/fa';
 import { formatDate } from '../../utils/date';
 import useUserStore from '../../zustand/userStore';
@@ -6,6 +6,7 @@ import { useDeleteMutation } from '../../hooks/queries/article.query';
 import { useNavigate } from 'react-router-dom';
 import CommentForm from '../comment/CommentForm';
 import CommentList from '../comment/CommentList';
+import WriteTipTapEditor from '../editor/WriteTipTapEditor';
 
 function PostContent(props) {
     const { article } = props;
@@ -57,12 +58,8 @@ function PostContent(props) {
                             alt='thumbnail'
                         />
                     </div>
-                </div>
-                <div className='ql-snow sm:text-sm'>
-                    <div
-                        className='view ql-editor !p-0'
-                        dangerouslySetInnerHTML={{ __html: content }}
-                    ></div>
+
+                    <WriteTipTapEditor content={content} editable={false} />
                 </div>
             </div>
             {isLoggedIn && <CommentForm articleId={id} authorId={authorId} />}
