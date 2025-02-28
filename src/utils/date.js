@@ -23,3 +23,9 @@ export function notificationTimeFormat(date) {
 
     return format(targetDate, 'yyyy년 MM월 dd일', { locale: ko });
 }
+
+export const postTimeFormat = (date) => {
+    const targetDate = new Date(date);
+
+    return format(targetDate, 'yyyy-MM-dd HH:mm:ss', { locale: ko });
+};

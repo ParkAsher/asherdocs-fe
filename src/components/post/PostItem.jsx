@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from '../common/Link';
 import { FaRegEye } from 'react-icons/fa';
-import { formatDate } from '../../utils/date';
+import { postTimeFormat } from '../../utils/date';
 
 const PostItem = React.forwardRef((props, ref) => {
     const { id, thumbnail, title, views, createdAt, category } = props.article;
@@ -26,7 +26,7 @@ const PostItem = React.forwardRef((props, ref) => {
                     <FaRegEye /> {views}
                 </div>
                 <div className='category-name'>{categoryName}</div>
-                <div className='created-at'>{formatDate(createdAt)}</div>
+                <div className='created-at'>{postTimeFormat(createdAt)}</div>
             </div>
         </div>
     );

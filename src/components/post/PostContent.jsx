@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { FaRegEye } from 'react-icons/fa';
-import { formatDate } from '../../utils/date';
+import { formatDate, postTimeFormat } from '../../utils/date';
 import useUserStore from '../../zustand/userStore';
 import { useDeleteMutation } from '../../hooks/queries/article.query';
 import { useNavigate } from 'react-router-dom';
@@ -42,7 +42,7 @@ function PostContent(props) {
                                 <FaRegEye /> {views}
                             </div>
                             <div className='category-name'>{category.categoryName}</div>
-                            <div className='created-at'>{formatDate(createdAt)}</div>
+                            <div className='created-at'>{postTimeFormat(createdAt)}</div>
                         </div>
                         {isLoggedIn && role === 1 ? (
                             <div className='flex items-center justify-between gap-2 cursor-pointer sm:text-sm'>
