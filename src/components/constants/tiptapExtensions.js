@@ -49,5 +49,8 @@ export const extensions = [
     }),
     CodeBlockLowlight.configure({
         lowlight,
+        HTMLAttributes: {
+            class: `!whitespace-pre !overflow-auto`,
+        },
     }),
 ];
