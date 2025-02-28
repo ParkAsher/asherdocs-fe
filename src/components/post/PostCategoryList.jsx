@@ -15,13 +15,13 @@ function PostCategoryList({ category: categoryParam }) {
     const categoryList = Array.isArray(categories) ? categories : [];
 
     return (
-        <div className='absolute bg-white rounded -left-[196px] w-[180px] xl:relative xl:w-full xl:left-auto xl:mb-4 xl:p-4 xl:flex xl:gap-2 xl:overflow-x-auto'>
+        <div className='absolute bg-white rounded -left-[196px] w-[180px] xl:relative xl:w-full xl:left-auto xl:mb-4 xl:py-4 xl:px-2 xl:flex xl:gap-2 xl:overflow-x-auto'>
             <div className='text-lg font-bold px-2 py-4 border-b border-solid border-gray-200 xl:hidden'>
                 카테고리
             </div>
             <div
-                className={`text-sm p-2 border-b border-solid border-gray-200 xl:p-0 xl:border-none ${
-                    categoryParam ? 'text-black' : 'text-blue-500 font-bold'
+                className={`text-sm p-2 border-b border-solid border-gray-200 xl:p-1 xl:rounded xl:border-none ${
+                    categoryParam ? 'text-black' : 'text-blue-500 xl:bg-blue-500 xl:text-white'
                 } xl: shrink-0`}
             >
                 <Link to={`/`}>전체보기</Link>
@@ -30,11 +30,11 @@ function PostCategoryList({ category: categoryParam }) {
                 const { id, categoryName, contentsCount } = category;
                 return (
                     <div
-                        className={`text-sm p-2 border-b border-solid border-gray-200 xl:p-0 xl:border-none ${
+                        className={`text-sm p-2 border-b border-solid border-gray-200 xl:border-none xl:rounded xl:p-1 xl:shrink-0 ${
                             categoryParam === categoryName
-                                ? 'text-blue-500 font-bold'
+                                ? 'text-blue-500 xl:text-white xl:bg-blue-500'
                                 : 'text-black'
-                        } xl: shrink-0`}
+                        }`}
                         key={id}
                     >
                         <Link to={`/?category=${categoryName}`}>
