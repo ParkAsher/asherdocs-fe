@@ -45,8 +45,6 @@ export const deleteArticle = async (id) => {
 
 // 글 수정
 export const editArticle = async (id, editForm) => {
-    console.log(id, editForm);
-
     const token = sessionStorage.getItem('token') ?? null;
     const response = await axios.put(`${SERVER_URL}/article/${id}`, editForm, {
         withCredentials: true,

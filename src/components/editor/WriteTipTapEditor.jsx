@@ -6,7 +6,7 @@ import { extensions } from '../constants/tiptapExtensions';
 function WriteTipTapEditor({ handler, content, editable }) {
     const editor = useEditor({
         editable,
-        extensions: extensions,
+        extensions: extensions({ editable }),
         editorProps: {
             attributes: {
                 class: `!prose !max-w-none p-2 mb-2 focus:outline-none ${
@@ -15,18 +15,17 @@ function WriteTipTapEditor({ handler, content, editable }) {
                         : 'xxl:!prose-xl lg:!prose-lg md:!prose-base sm:!prose-xs'
                 }`,
             },
+            spellcheck: false,
         },
         onUpdate: ({ editor }) => {
             const value = editor.getHTML();
 
-            const a = {
+            handler({
                 target: {
                     name: 'content',
                     value: value,
                 },
-            };
-
-            handler(a);
+            });
         },
         content: content,
     });
