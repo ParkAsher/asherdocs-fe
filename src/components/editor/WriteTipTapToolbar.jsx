@@ -20,6 +20,7 @@ import {
     RiPaintFill,
     RiDoubleQuotesL,
     RiYoutubeFill,
+    RiEraserFill,
 } from 'react-icons/ri';
 import imageCompression from 'browser-image-compression';
 import axios from 'axios';
@@ -47,6 +48,14 @@ const ColorPalette = ({ onSelectColor }) => {
                     style={{ backgroundColor: color }}
                 />
             ))}
+
+            {/* */}
+            <button
+                onClick={() => onSelectColor(null)}
+                className='w-8 h-8 flex items-center justify-center rounded-full border border-solid border-gray-300 bg-white text-gray-500'
+            >
+                <RiEraserFill />
+            </button>
         </div>
     );
 };
@@ -70,14 +79,26 @@ function WriteTipTapToolbar({ editor }) {
     // 글자 색
     const handleTextColor = (color) => {
         setSelectedColor(color);
-        editor.chain().focus().setColor(color).run();
+
+        if (!color) {
+            editor.commands.unsetColor();
+        } else {
+            editor.chain().focus().setColor(color).run();
+        }
+
         setShowColorPalette(false);
     };
 
     // 글자 배경색
     const handleBgColor = (color) => {
         setSelectedBgColor(color);
-        editor.chain().focus().toggleHighlight({ color }).run();
+
+        if (!color) {
+            editor.commands.unsetHighlight();
+        } else {
+            editor.chain().focus().toggleHighlight({ color }).run();
+        }
+
         setShowBgColorPalette(false);
     };
 

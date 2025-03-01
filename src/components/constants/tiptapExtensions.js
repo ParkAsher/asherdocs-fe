@@ -18,6 +18,7 @@ import js from 'highlight.js/lib/languages/javascript';
 import ts from 'highlight.js/lib/languages/typescript';
 import html from 'highlight.js/lib/languages/xml';
 import 'highlight.js/styles/atom-one-dark.css';
+import TextStyle from '@tiptap/extension-text-style';
 
 const lowlight = createLowlight(common);
 
@@ -31,6 +32,7 @@ export const extensions = ({ editable }) => {
         StarterKit,
         Color,
         Underline,
+
         Blockquote.configure({
             HTMLAttributes: { class: 'prose-quoteless' },
         }),
@@ -41,6 +43,7 @@ export const extensions = ({ editable }) => {
             marks: '',
         }),
         Highlight.configure({ multicolor: true }),
+        TextStyle,
         TextAlign.configure({
             types: ['heading', 'paragraph'],
         }),
