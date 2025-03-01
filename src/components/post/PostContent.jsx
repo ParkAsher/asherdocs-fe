@@ -35,8 +35,11 @@ function PostContent(props) {
         <>
             <div className='w-full py-8 border-b border-solid border-gray-300'>
                 <div className='w-full'>
-                    <div className='font-bold text-4xl break-all mb-8 sm:text-xl'>{title}</div>
-                    <div className='w-full flex items-center justify-between text-gray-400 sm:text-sm'>
+                    {/* 글 제목 */}
+                    <div className='mb-8 font-bold text-4xl break-all sm:text-xl'>{title}</div>
+
+                    {/* 글 상세 */}
+                    <div className='w-full mb-4 flex items-center justify-between text-gray-400 sm:text-sm'>
                         <div className='flex flex-wrap items-center gap-2'>
                             <div className='flex flex-wrap items-center gap-1'>
                                 <FaRegEye /> {views}
@@ -51,14 +54,17 @@ function PostContent(props) {
                             </div>
                         ) : null}
                     </div>
-                    <div className='my-8 w-full h-[500px] sm:h-[300px]'>
+
+                    {/* 썸네일 */}
+                    <div className='mb-8 w-full h-full md:aspect-w-8 md:aspect-h-5'>
                         <img
-                            className='w-full h-full object-cover'
+                            className='w-[800px] h-[500px] object-cover rounded lg:w-full lg:h-full'
                             src={thumbnail}
                             alt='thumbnail'
                         />
                     </div>
 
+                    {/* 글 내용 */}
                     <WriteTipTapEditor content={content} editable={false} />
                 </div>
             </div>
