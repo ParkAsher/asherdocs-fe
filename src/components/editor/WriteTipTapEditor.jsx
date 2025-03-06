@@ -12,7 +12,7 @@ function WriteTipTapEditor({ handler, content, editable }) {
                 class: `!prose !max-w-none p-2 mb-2 focus:outline-none ${
                     editable
                         ? 'min-h-[800px] border border-solid border-gray-300'
-                        : 'xxl:!prose-xl lg:!prose-lg md:!prose-base sm:!prose-xs'
+                        : 'p-0 xxl:!prose-lg lg:!prose-md md:!prose-base sm:!prose-xs'
                 }`,
             },
             spellcheck: false,
