@@ -9,10 +9,10 @@ function WriteTipTapEditor({ handler, content, editable }) {
         extensions: extensions({ editable }),
         editorProps: {
             attributes: {
-                class: `!prose !max-w-none p-2 mb-2 focus:outline-none ${
+                class: `!prose !max-w-none mb-2 focus:outline-none ${
                     editable
-                        ? 'min-h-[800px] border border-solid border-gray-300'
-                        : 'p-0 xxl:!prose-lg lg:!prose-md md:!prose-base sm:!prose-xs'
+                        ? 'p-2 min-h-[800px] border border-solid border-gray-300'
+                        : 'p-0 sm:!prose-sm'
                 }`,
             },
             spellcheck: false,
