@@ -4,12 +4,12 @@ import { FaRegEye } from 'react-icons/fa';
 import { postTimeFormat } from '../../utils/date';
 
 const PostItem = React.forwardRef((props, ref) => {
-    const { id, thumbnail, title, views, createdAt, category } = props.article;
+    const { id, thumbnail, title, views, createdAt, category, slug } = props.article;
     const { categoryName } = category;
 
     return (
         <div className='w-full bg-white mb-4 rounded' ref={ref}>
-            <Link to={`/article/${id}`}>
+            <Link to={`/article/${slug}`}>
                 <div className='w-full h-full rounded md:aspect-w-8 md:aspect-h-5 md:rounded-none'>
                     <img
                         className='w-[800px] h-[500px] object-cover rounded lg:w-full lg:h-full lg:rounded-none'

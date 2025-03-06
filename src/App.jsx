@@ -41,8 +41,8 @@ function App() {
                     <Route path='/login' element={<Login />} />
                     <Route path='/signup' element={<Signup />} />
                     <Route path='/write' element={<Write />} />
-                    <Route path='/article/:id' element={<Post />} />
-                    <Route path='/edit/:id' element={<Edit />} />
+                    <Route path='/article/:slug' element={<Post />} />
+                    <Route path='/edit/:slug' element={<Edit />} />
                     <Route path='/search' element={<Search />} />
                     <Route path='/notification' element={<Notification />} />
                 </Routes>

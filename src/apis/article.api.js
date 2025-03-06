@@ -24,8 +24,8 @@ export const getArticles = async ({ pageParam, category }) => {
     return response.data;
 };
 
-export const getArticle = async (id) => {
-    const response = await axios.get(`${SERVER_URL}/article/${id}`, {
+export const getArticle = async (slug) => {
+    const response = await axios.get(`${SERVER_URL}/article/${slug}`, {
         withCredentials: true,
     });
 
@@ -33,9 +33,9 @@ export const getArticle = async (id) => {
 };
 
 // 글 삭제
-export const deleteArticle = async (id) => {
+export const deleteArticle = async (slug) => {
     const token = sessionStorage.getItem('token') ?? null;
-    const response = await axios.delete(`${SERVER_URL}/article/${id}`, {
+    const response = await axios.delete(`${SERVER_URL}/article/${slug}`, {
         withCredentials: true,
         headers: { Authorization: `Bearer ${token}` },
     });
@@ -44,9 +44,9 @@ export const deleteArticle = async (id) => {
 };
 
 // 글 수정
-export const editArticle = async (id, editForm) => {
+export const editArticle = async (slug, editForm) => {
     const token = sessionStorage.getItem('token') ?? null;
-    const response = await axios.put(`${SERVER_URL}/article/${id}`, editForm, {
+    const response = await axios.put(`${SERVER_URL}/article/${slug}`, editForm, {
         withCredentials: true,
         headers: { Authorization: `Bearer ${token}` },
     });

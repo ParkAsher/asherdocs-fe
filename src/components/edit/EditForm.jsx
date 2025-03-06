@@ -11,7 +11,7 @@ import WriteTipTapEditor from '../editor/WriteTipTapEditor';
 
 function EditForm(props) {
     const { article } = props;
-    const { id, title, category, content, thumbnail } = article;
+    const { id, title, category, content, thumbnail, slug } = article;
     const { id: categoryId } = category;
 
     const [values, handler] = useInputs({
@@ -49,7 +49,7 @@ function EditForm(props) {
         [handler]
     );
 
-    const { mutate: editMutation } = useEditMutation(id);
+    const { mutate: editMutation } = useEditMutation(slug);
 
     const handleEditButtonClick = (e) => {
         e.preventDefault();

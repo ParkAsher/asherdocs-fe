@@ -10,16 +10,26 @@ import WriteTipTapEditor from '../editor/WriteTipTapEditor';
 
 function PostContent(props) {
     const { article } = props;
-    const { id, title, category, userId: authorId, content, thumbnail, createdAt, views } = article;
+    const {
+        id,
+        title,
+        category,
+        userId: authorId,
+        content,
+        thumbnail,
+        createdAt,
+        views,
+        slug,
+    } = article;
 
     const { isLoggedIn, role } = useUserStore((state) => state);
 
-    const { mutate: deleteMutation } = useDeleteMutation(id);
+    const { mutate: deleteMutation } = useDeleteMutation(slug);
 
     const navigate = useNavigate();
 
     const postEditOnClickHandler = () => {
-        navigate(`/edit/${id}`);
+        navigate(`/edit/${slug}`);
     };
 
     const postDeleteOnClickHandler = () => {

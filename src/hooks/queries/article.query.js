@@ -24,19 +24,19 @@ export const useWriteMutation = () => {
 };
 
 // 글 삭제
-export const useDeleteMutation = (id) => {
+export const useDeleteMutation = (slug) => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
     const handleAuthError = useHandleAuthError();
 
     return useMutation({
-        mutationFn: () => deleteArticle(id),
+        mutationFn: () => deleteArticle(slug),
         onSuccess: (data) => {
             alert('글을 삭제했습니다.');
             queryClient.invalidateQueries(['categories']);
             queryClient.invalidateQueries(['articles']);
-            queryClient.invalidateQueries(['article', id]);
+            queryClient.invalidateQueries(['article', slug]);
 
             navigate('/');
         },
@@ -45,19 +45,19 @@ export const useDeleteMutation = (id) => {
 };
 
 // 글 수정
-export const useEditMutation = (id) => {
+export const useEditMutation = (slug) => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
     const handleAuthError = useHandleAuthError();
 
     return useMutation({
-        mutationFn: (editForm) => editArticle(id, editForm),
+        mutationFn: (editForm) => editArticle(slug, editForm),
         onSuccess: (data) => {
             alert('글을 수정했습니다.');
             queryClient.invalidateQueries(['categories']);
             queryClient.invalidateQueries(['articles']);
-            queryClient.invalidateQueries(['article', id]);
+            queryClient.invalidateQueries(['article', slug]);
 
             navigate('/');
         },

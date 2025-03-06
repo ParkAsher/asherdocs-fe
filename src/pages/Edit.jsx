@@ -5,11 +5,11 @@ import { getArticle } from '../apis/article.api';
 import EditForm from '../components/edit/EditForm';
 
 function Edit() {
-    const { id } = useParams();
+    const { slug } = useParams();
 
     const { data: article, isLoading } = useQuery({
-        queryKey: ['article', id],
-        queryFn: () => getArticle(id),
+        queryKey: ['article', slug],
+        queryFn: () => getArticle(slug),
     });
 
     if (isLoading) return;

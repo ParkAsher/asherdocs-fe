@@ -7,11 +7,11 @@ import Meta from '../components/meta/Meta';
 import { stripHtmlTags } from '../utils/stripHtmlTag';
 
 function Post() {
-    const { id } = useParams();
+    const { slug } = useParams();
 
     const { data: article, isLoading } = useQuery({
-        queryKey: ['article', id],
-        queryFn: () => getArticle(id),
+        queryKey: ['article', slug],
+        queryFn: () => getArticle(slug),
     });
 
     if (isLoading) {
@@ -25,7 +25,7 @@ function Post() {
                 description={`${stripHtmlTags(article.content).slice(0, 150)}`}
                 keywords={`Asher, AsherDocs, 개발, 개발자, 블로그, ${article.category.categoryName}`}
                 imgSrc={`${article.thumbnail}`}
-                url={`https://asherdocs.com/article/${article.id}`}
+                url={`https://asherdocs.com/article/${article.slug}`}
             />
             <div className='w-full border-t border-solid border-gray-200'>
                 <div className='mx-auto my-0 w-[800px] lg:w-full lg:px-2'>
