@@ -15,6 +15,28 @@ module.exports = {
                         blockquote: {
                             fontStyle: 'normal',
                         },
+                        pre: {
+                            margin: '0 !important',
+                        },
+                        'ul li p, ol li p': {
+                            margin: '0 !important',
+                        },
+                    },
+                },
+                sm: {
+                    css: {
+                        p: {
+                            margin: '0 !important',
+                        },
+                        li: {
+                            margin: '0 !important',
+                        },
+                        blockquote: {
+                            fontStyle: 'normal',
+                        },
+                        pre: {
+                            margin: '0 !important',
+                        },
                         'ul li p, ol li p': {
                             margin: '0 !important',
                         },
